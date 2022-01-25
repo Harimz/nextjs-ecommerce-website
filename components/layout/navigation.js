@@ -1,24 +1,49 @@
+import React, { useState } from "react";
 import Link from "next/link";
-import React from "react";
-import { Container, Flex } from "../../elements";
+import { Container } from "../../elements";
 import { Heading } from "../../elements/headings";
-import { AuthLink, SearchInput } from "./styles";
+import { FaBars, FaSearch } from "react-icons/fa";
+import {
+  AuthContainer,
+  AuthLink,
+  MenuButton,
+  MenuButtonBurger,
+  NavWrapper,
+  SearchContainer,
+  SearchInput,
+} from "./styles/nav-styles";
+import MobileNav from "./mobile-nav";
 
 const Navigation = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <Container>
-      <Flex p="2rem" justify="space-between" align="center">
-        <Heading>Shigeo</Heading>
-        <SearchInput />
-        <Flex>
+      <NavWrapper>
+        <Link passHref href="/">
+          <Heading cursor="pointer">Shigeo</Heading>
+        </Link>
+
+        <SearchContainer>
+          <FaSearch className="search" />
+          <SearchInput />
+        </SearchContainer>
+
+        <AuthContainer gap="5rem">
           <Link passHref href="/login">
             <AuthLink>Login</AuthLink>
           </Link>
           <Link passHref href="/signup">
             <AuthLink>Signup</AuthLink>
           </Link>
-        </Flex>
-      </Flex>
+        </AuthContainer>
+
+        <MenuButton onClick={() => setMenuOpen((state) => !state)}>
+          <MenuButtonBurger isOpen={menuOpen} />
+        </MenuButton>
+      </NavWrapper>
+
+      <MobileNav menuOpen={menuOpen} setIsOpen={setMenuOpen} />
     </Container>
   );
 };

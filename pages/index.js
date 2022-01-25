@@ -3,7 +3,7 @@ import Image from "next/image";
 import styled from "styled-components";
 
 const Home = () => {
-  return <></>;
+  return <>hi</>;
 };
 
 export default Home;

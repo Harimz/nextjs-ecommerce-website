@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  max-width: 90rem;
+  max-width: 125rem;
   width: 90%;
   margin: auto;
 `;
@@ -16,4 +16,12 @@ export const Flex = styled.div`
   margin-top: ${({ mt }) => (mt ? mt : 0)};
   margin-bottom: ${({ mr }) => (mr ? mr : 0)};
   margin-bottom: ${({ ml }) => (ml ? ml : 0)};
+  border: 2px solid red;
+`;
+
+export const Box = styled.div`
+  display: block;
+  position: ${({ pos }) => pos && pos};
+  border: 2px solid red;
+  width: ${({ w }) => w && w};
 `;
