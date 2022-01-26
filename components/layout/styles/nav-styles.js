@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const NavWrapper = styled.div`
   display: flex;
-  padding: 2rem;
+  padding: 2rem 0;
   justify-content: space-between;
 
   @media (max-width: 945px) {

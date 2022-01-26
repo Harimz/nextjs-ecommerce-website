@@ -7,5 +7,5 @@ export const Heading = styled.h1`
 `;
 
 export const SubHeading = styled.h2`
-  font-size: ${({ size }) => (size ? size : "1.5rem")};
+  font-size: ${({ size }) => (size ? size : "1.25rem")};
 `;
