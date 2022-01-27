@@ -6,7 +6,7 @@ import Header from "../components/header";
 
 const Home = () => {
   return (
-    <Container>
+    <Container mt="2rem">
       <Header />
     </Container>
   );

@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 export const BrowseContainer = styled.div`
-  @media (max-width: 960px) {
+  width: 20%;
+
+  @media (max-width: 1030px) {
     display: none;
   }
 `;
@@ -42,7 +44,7 @@ export const BrowseMenuItem = styled.li`
 export const BrowseMenuItemBox = styled.ul`
   position: absolute;
   top: -2rem;
-  right: -8rem;
+  right: -2rem;
   background: white;
   box-shadow: 1px 2px 5px ${({ theme }) => theme.green[200]};
   padding: 1rem;
@@ -53,6 +55,7 @@ export const BrowseMenuItemBox = styled.ul`
   flex-direction: column;
   grid-gap: 1rem;
   display: ${({ isVisible }) => (isVisible ? "flex" : "none")};
+  z-index: 999;
 
   li {
     transition: all 0.3s ease;

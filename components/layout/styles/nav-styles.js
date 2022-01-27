@@ -21,7 +21,7 @@ export const SearchContainer = styled.div`
     margin: auto 1rem;
   }
 
-  @media (max-width: 945px) {
+  @media (max-width: 1050px) {
     display: ${({ mobile }) => (mobile ? "block" : "none")};
   }
 `;
@@ -57,7 +57,7 @@ export const AuthContainer = styled.div`
   align-items: center;
   grid-gap: 5rem;
 
-  @media (max-width: 945px) {
+  @media (max-width: 1050px) {
     display: none;
   }
 `;
@@ -72,7 +72,7 @@ export const MenuButton = styled.div`
   display: none;
   transition: all 0.5s ease-in-out;
 
-  @media (max-width: 945px) {
+  @media (max-width: 1050px) {
     display: flex;
   }
 `;

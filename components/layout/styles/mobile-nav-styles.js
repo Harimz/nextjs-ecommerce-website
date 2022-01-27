@@ -10,7 +10,7 @@ export const Backdrop = styled(motion.div)`
   background: rgba(0, 0, 0, 0.5);
   z-index: 1;
 
-  @media (min-width: 946px) {
+  @media (min-width: 1051px) {
     display: none;
   }
 `;
@@ -22,8 +22,9 @@ export const Menu = styled(motion.div)`
   padding: 2rem;
   background: white;
   height: 100vh;
+  z-index: 99;
 
-  @media (min-width: 946px) {
+  @media (min-width: 1051px) {
     display: none;
   }
 `;

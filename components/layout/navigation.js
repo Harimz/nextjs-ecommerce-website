@@ -21,7 +21,7 @@ const Navigation = () => {
     <Container>
       <NavWrapper>
         <Link passHref href="/">
-          <Heading cursor="pointer">Shigeo</Heading>
+          <Heading type="pointer">Shigeo</Heading>
         </Link>
 
         <SearchContainer>

@@ -17,6 +17,9 @@ const theme = {
     100: "#95d5b2",
     200: "#52b788",
   },
+  red: {
+    100: "#e63946",
+  },
 };
 
 export default theme;

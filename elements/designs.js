@@ -3,7 +3,9 @@ import styled from "styled-components";
 export const Container = styled.div`
   max-width: 125rem;
   width: 90%;
-  margin: auto;
+  margin: 0 auto;
+  margin-top: ${({ mt }) => mt};
+  margin-bottom: ${({ mb }) => mb};
 `;
 
 export const Flex = styled.div`

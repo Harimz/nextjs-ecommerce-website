@@ -1,27 +1,35 @@
 import styled from "styled-components";
 
-export const TransparentBtn = styled.button`
-  background: none;
+export const DefaultBtn = styled.button`
   padding: ${({ p }) => (p ? p : "1rem")};
-  color: ${({ theme }) => theme.green[200]};
-  font-weight: 600;
   cursor: pointer;
-  border: none;
+  font-weight: 600;
+  margin: ${({ m }) => m};
   font-size: 1rem;
-`;
 
-export const PrimaryBtn = styled.button`
-  background: ${({ theme }) => theme.green[200]};
-  padding: ${({ p }) => (p ? p : "1rem")};
-  color: white;
-  transition: scale 0.3s ease-in;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  border-radius: 0.5rem;
-  font-size: 1rem;
+  transition: all 0.3s ease-in;
 
   &:hover {
     transform: scale(0.95);
+    box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.5);
   }
+
+  &:active {
+    transform: scale(1);
+  }
+`;
+
+export const TransparentBtn = styled(DefaultBtn)`
+  background: none;
+  color: ${({ theme }) => theme.green[200]};
+  font-weight: 600;
+  border: none;
+`;
+
+export const PrimaryBtn = styled(DefaultBtn)`
+  background: ${({ theme }) => theme.green[200]};
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5rem;
 `;
