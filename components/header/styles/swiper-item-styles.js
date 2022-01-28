@@ -1,11 +1,9 @@
 import styled from "styled-components";
 
 export const SwiperItemContainer = styled.div`
-  position: relative;
   display: flex;
   justify-content: space-between;
   padding: 5rem;
-  z-index: 1;
 
   @media (max-width: 1030px) {
     padding: 0;
