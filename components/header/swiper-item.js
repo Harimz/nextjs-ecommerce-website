@@ -23,9 +23,7 @@ const SwiperItem = ({ title, text, img, price }) => {
         <Text m="2rem 0" size="1.25rem">
           {text}
         </Text>
-        <SubHeading>
-          Starting from <DangerHeading size="2rem">{price}</DangerHeading>
-        </SubHeading>
+        <SubHeading>Starting from {price}</SubHeading>
         <PrimaryBtn m="2rem 0">Shop Now</PrimaryBtn>
       </ItemContent>
 
