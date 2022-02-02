@@ -2,15 +2,17 @@ import { Container } from "../elements";
 import Header from "../components/header";
 import Info from "../components/info";
 import { server } from "../config";
+import DisplayProducts from "../components/display";
 
-const Home = ({ consoleList, laptopList }) => {
-  console.log(consoleList);
+const Home = ({ consoleList, laptopList, monitorList }) => {
   console.log(laptopList);
-
   return (
     <Container mt="2rem">
       <Header />
       <Info />
+      <DisplayProducts products={consoleList} amount={5} title="Consoles" />
+      <DisplayProducts products={laptopList} amount={5} title="Laptops" />
+      <DisplayProducts products={monitorList} amount={5} title="Monitors" />
     </Container>
   );
 };
@@ -22,10 +24,14 @@ export const getStaticProps = async () => {
   const laptopRes = await fetch(`${server}/api/products/category/laptop`);
   const laptopData = await laptopRes.json();
 
+  const monitorRes = await fetch(`${server}/api/products/category/monitor`);
+  const monitorData = await monitorRes.json();
+
   return {
     props: {
       consoleList: consoleData,
       laptopList: laptopData,
+      monitorList: monitorData,
     },
   };
 };

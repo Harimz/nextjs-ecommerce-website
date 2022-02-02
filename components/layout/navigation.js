@@ -26,7 +26,7 @@ const Navigation = () => {
 
         <SearchContainer>
           <FaSearch className="search" />
-          <SearchInput />
+          <SearchInput placeholder="Search for a product" />
         </SearchContainer>
 
         <AuthContainer gap="5rem">

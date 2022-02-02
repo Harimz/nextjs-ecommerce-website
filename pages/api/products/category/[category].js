@@ -9,7 +9,7 @@ const handler = async (req, res) => {
   try {
     const products = await Product.find({ category });
 
-    res.status(200).send({ status: "success", data: products });
+    res.status(200).send(products);
   } catch (error) {
     res.status(404).send({ status: "error", message: "Something went wrong" });
   }
