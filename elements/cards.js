@@ -17,12 +17,17 @@ export const InfoCard = styled.div`
 `;
 
 export const ProductCard = styled(motion.div)`
-  background: linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)),
-    url(${({ imgPath }) => `${imgPath}`});
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
+  position: relative;
   border-radius: 0.5rem;
-  height: 20rem;
   cursor: pointer;
+
+  .imgContainer {
+    position: relative;
+    width: 100%;
+    height: 20rem;
+    filter: brightness(95%);
+    border-radius: 1rem;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
 `;

@@ -1,5 +1,5 @@
 import { ThemeProvider } from "styled-components";
-import Layout from "../components/layout/layout";
+import Layout from "../components/layout";
 import GlobalStyle from "../styles/global-styles";
 import theme from "../styles/theme";
 import { Provider } from "react-redux";

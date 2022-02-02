@@ -25,3 +25,5 @@ export const ExploreBox = styled.div`
     color: ${({ theme }) => theme.green[100]};
   }
 `;
+
+export const ProductInfoContainer = styled.div``;

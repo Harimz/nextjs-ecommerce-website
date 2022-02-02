@@ -5,6 +5,7 @@ export const Heading = styled.h1`
   font-weight: ${({ fw }) => (fw ? fw : "600")};
   cursor: ${({ type }) => type};
   margin: ${({ m }) => m};
+  color: ${({ color }) => color};
 `;
 
 export const SubHeading = styled.h2`
