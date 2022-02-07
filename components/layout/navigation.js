@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import { Container } from "../../elements";
+import { Container, InputContainer, Input } from "../../elements";
 import { Heading } from "../../elements/headings";
-import { FaBars, FaSearch } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 import {
   AuthContainer,
   AuthLink,
   MenuButton,
   MenuButtonBurger,
   NavWrapper,
-  SearchContainer,
-  SearchInput,
 } from "./styles/nav-styles";
 import MobileNav from "./mobile-nav";
 
@@ -24,10 +22,10 @@ const Navigation = () => {
           <Heading type="pointer">Shigeo</Heading>
         </Link>
 
-        <SearchContainer>
-          <FaSearch className="search" />
-          <SearchInput placeholder="Search for a product" />
-        </SearchContainer>
+        <InputContainer>
+          <FaSearch className="input-icon" />
+          <Input placeholder="Search for a product" />
+        </InputContainer>
 
         <AuthContainer gap="5rem">
           <Link passHref href="/login">

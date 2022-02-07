@@ -26,4 +26,13 @@ export const ExploreBox = styled.div`
   }
 `;
 
-export const ProductInfoContainer = styled.div``;
+export const Favorite = styled.div`
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+
+  .heart {
+    color: ${({ theme }) => theme.gray[100]};
+    font-size: 1.5rem;
+  }
+`;

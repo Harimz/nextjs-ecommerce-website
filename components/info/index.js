@@ -1,5 +1,5 @@
 import React from "react";
-import { InfoContainer } from "./styles/info-styles";
+import { InfoContainer } from "../../elements";
 import { MdOutlineLocalShipping } from "react-icons/md";
 import { BiMoney, BiSupport } from "react-icons/bi";
 import { RiSecurePaymentFill } from "react-icons/ri";

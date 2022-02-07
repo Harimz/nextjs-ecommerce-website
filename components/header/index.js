@@ -1,12 +1,12 @@
 import React from "react";
 import HeaderCategories from "./header-categories";
-import { HeaderContainer } from "./styles/header-styles";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay } from "swiper";
 import "swiper/css";
 import "swiper/css/autoplay";
 import SwiperItem from "./swiper-item";
 import { FEATURED_ITEMS } from "../../constants";
+import { HeaderContainer } from "../../elements";
 
 const Header = () => {
   SwiperCore.use([Autoplay]);

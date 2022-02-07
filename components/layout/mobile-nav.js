@@ -15,10 +15,15 @@ import {
   FaLongArrowAltDown,
   FaSearch,
 } from "react-icons/fa";
-import { AuthLink, SearchContainer, SearchInput } from "./styles/nav-styles";
+import { AuthLink } from "./styles/nav-styles";
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import Link from "next/link";
-import { PrimaryBtn, TransparentBtn } from "../../elements";
+import {
+  InputContainer,
+  PrimaryBtn,
+  TransparentBtn,
+  Input,
+} from "../../elements";
 import { backdropVariants, menuVariants } from "../../utils";
 
 const MobileNav = ({ menuOpen }) => {
@@ -71,10 +76,10 @@ const MobileNav = ({ menuOpen }) => {
               ))}
             </NavList>
 
-            <SearchContainer mobile w="100%">
-              <FaSearch className="search" />
-              <SearchInput />
-            </SearchContainer>
+            <InputContainer mobile w="100%">
+              <FaSearch className="input-icon" />
+              <Input />
+            </InputContainer>
 
             <AuthContainer>
               <TransparentBtn>Login</TransparentBtn>

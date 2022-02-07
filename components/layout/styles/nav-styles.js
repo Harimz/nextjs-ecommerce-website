@@ -10,36 +10,6 @@ export const NavWrapper = styled.div`
   }
 `;
 
-export const SearchContainer = styled.div`
-  position: relative;
-  width: ${({ w }) => (w ? w : "60%")};
-
-  .search {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto 1rem;
-  }
-
-  @media (max-width: 1050px) {
-    display: ${({ mobile }) => (mobile ? "block" : "none")};
-  }
-`;
-
-export const SearchInput = styled.input`
-  padding: 0.75rem 1rem 0.75rem 3rem;
-  width: 100%;
-  border-radius: 0.5rem;
-  border: 1px solid gray;
-  font-size: 1.25rem;
-  outline: none;
-  transition: all 0.3s ease;
-
-  &:focus {
-    outline: 1px solid ${({ theme }) => theme.green[100]};
-  }
-`;
-
 export const AuthLink = styled.a`
   text-decoration: none;
   color: ${({ theme }) => theme.gray[500]};

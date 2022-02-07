@@ -30,4 +30,10 @@ export const ProductCard = styled(motion.div)`
     overflow: hidden;
     margin-bottom: 1rem;
   }
+
+  @media (max-width: 960px) {
+    .imgContainer {
+      height: 15rem;
+    }
+  }
 `;

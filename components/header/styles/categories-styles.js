@@ -1,13 +1,5 @@
 import styled from "styled-components";
 
-export const BrowseContainer = styled.div`
-  width: 20%;
-
-  @media (max-width: 1030px) {
-    display: none;
-  }
-`;
-
 export const BrowseMenu = styled.ul`
   position: relative;
   list-style-type: none;

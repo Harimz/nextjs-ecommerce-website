@@ -6,6 +6,7 @@ export const DefaultBtn = styled.button`
   font-weight: 600;
   margin: ${({ m }) => m};
   font-size: 1rem;
+  width: ${({ w }) => (w ? w : "100%")};
 
   transition: all 0.3s ease-in;
 

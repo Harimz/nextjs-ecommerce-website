@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { CATEGORIES } from "../../constants";
 import { Heading, SubHeading } from "../../elements/headings";
 import {
-  BrowseContainer,
   BrowseMenu,
   BrowseMenuItem,
   BrowseMenuItemBox,
@@ -10,6 +9,7 @@ import {
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import Link from "next/link";
 import { FaLongArrowAltRight } from "react-icons/fa";
+import { BrowseContainer } from "../../elements";
 
 const HeaderCategories = () => {
   const [isHovering, setIsHovering] = useState(-1);

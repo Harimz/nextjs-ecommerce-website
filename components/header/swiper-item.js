@@ -1,17 +1,13 @@
 import React from "react";
 import Image from "next/image";
 import {
-  DangerHeading,
   Heading,
   PrimaryBtn,
   SubHeading,
+  SwiperItemContainer,
   Text,
 } from "../../elements";
-import {
-  ItemContent,
-  SwiperImage,
-  SwiperItemContainer,
-} from "./styles/swiper-item-styles";
+import { ItemContent, SwiperImage } from "./styles/swiper-item-styles";
 
 const SwiperItem = ({ title, text, img, price }) => {
   return (
@@ -24,7 +20,9 @@ const SwiperItem = ({ title, text, img, price }) => {
           {text}
         </Text>
         <SubHeading>Starting from {price}</SubHeading>
-        <PrimaryBtn m="2rem 0">Shop Now</PrimaryBtn>
+        <PrimaryBtn m="2rem 0" w="10rem">
+          Shop Now
+        </PrimaryBtn>
       </ItemContent>
 
       <SwiperImage>

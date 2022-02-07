@@ -4,7 +4,7 @@ import Info from "../components/info";
 import { server } from "../config";
 import DisplayProducts from "../components/display";
 
-const Home = ({ consoleList, laptopList, monitorList }) => {
+const HomePage = ({ consoleList, laptopList, monitorList }) => {
   console.log(laptopList);
   return (
     <Container mt="2rem">
@@ -36,4 +36,4 @@ export const getStaticProps = async () => {
   };
 };
 
-export default Home;
+export default HomePage;
