@@ -12,4 +12,8 @@ export const Input = styled.input`
   &:focus {
     outline: 1px solid ${({ theme }) => theme.green[100]};
   }
+
+  .error {
+    border: 1px solid red;
+  }
 `;

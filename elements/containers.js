@@ -64,7 +64,8 @@ export const FooterContainer = styled.footer`
 
 export const InputContainer = styled.div`
   position: relative;
-  width: ${({ w }) => (w ? w : "60%")};
+  width: ${({ w }) => (w ? w : "100%")};
+  transition: all 0.1s ease-in;
 
   .input-icon {
     position: absolute;
@@ -74,8 +75,18 @@ export const InputContainer = styled.div`
     font-size: 1.25rem;
   }
 
+  &.error {
+    input {
+      border: 1px solid ${({ theme }) => theme.red[100]};
+    }
+
+    .input-icon {
+      color: ${({ theme }) => theme.red[100]};
+    }
+  }
+
   @media (max-width: 1050px) {
-    display: ${({ mobile }) => (mobile ? "block" : "none")};
+    display: ${({ mobile }) => (mobile ? "none" : "block")};
   }
 `;
 

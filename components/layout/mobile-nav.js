@@ -76,7 +76,7 @@ const MobileNav = ({ menuOpen }) => {
               ))}
             </NavList>
 
-            <InputContainer mobile w="100%">
+            <InputContainer w="100%">
               <FaSearch className="input-icon" />
               <Input />
             </InputContainer>

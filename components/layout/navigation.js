@@ -22,7 +22,7 @@ const Navigation = () => {
           <Heading type="pointer">Shigeo</Heading>
         </Link>
 
-        <InputContainer>
+        <InputContainer mobile w="60%">
           <FaSearch className="input-icon" />
           <Input placeholder="Search for a product" />
         </InputContainer>

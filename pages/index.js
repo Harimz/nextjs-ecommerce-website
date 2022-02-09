@@ -5,7 +5,6 @@ import { server } from "../config";
 import DisplayProducts from "../components/display";
 
 const HomePage = ({ consoleList, laptopList, monitorList }) => {
-  console.log(laptopList);
   return (
     <Container mt="2rem">
       <Header />

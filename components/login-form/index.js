@@ -17,7 +17,7 @@ const LoginForm = () => {
       <form>
         <InputFieldContainer>
           <InputHeading>Email</InputHeading>
-          <InputContainer w="100%">
+          <InputContainer>
             <HiAtSymbol className="input-icon" />
             <Input placeholder="johndoe@example.com" />
           </InputContainer>
@@ -25,7 +25,7 @@ const LoginForm = () => {
 
         <InputFieldContainer>
           <InputHeading>Password</InputHeading>
-          <InputContainer w="100%">
+          <InputContainer>
             <FaLock className="input-icon" />
             <Input type="password" placeholder="Password" />
           </InputContainer>
