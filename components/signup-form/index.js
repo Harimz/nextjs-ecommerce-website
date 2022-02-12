@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useForm } from "react-hook-form";
 import { FaLock, FaUserAlt } from "react-icons/fa";
 import { HiAtSymbol } from "react-icons/hi";
@@ -12,30 +11,36 @@ import {
   PrimaryBtn,
 } from "../../elements";
 import { signupOptions } from "../../utils";
+import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../../actions/userActions";
 
 const SignupForm = () => {
+  const dispatch = useDispatch();
+  const { createdUser } = useSelector((state) => state.userRegister);
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm(signupOptions);
-  const [userCreated, setUserCreated] = useState(false);
+  const router = useRouter();
 
   const submitHandler = async (user) => {
-    try {
-      const { data } = await axios.post("/api/users/register", user, {
-        headers: { "Content-Type": "application/json" },
-      });
+    dispatch(
+      registerUser({
+        name: user.name,
+        email: user.email,
+        password: user.password,
+      })
+    );
 
-      setUserCreated(true);
-    } catch (error) {
-      console.log(error.message);
+    if (createdUser) {
+      router.replace("/login");
     }
   };
 
   return (
     <form onSubmit={handleSubmit(submitHandler)}>
-      {userCreated && "User Created!"}
       <InputFieldContainer>
         <InputHeading>Name</InputHeading>
         <InputContainer className={errors.name && "error"}>
