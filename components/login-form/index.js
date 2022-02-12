@@ -1,20 +1,26 @@
 import React from "react";
 import {
+  Form,
   InputContainer,
   InputFieldContainer,
   InputHeading,
   PrimaryBtn,
-  TransparentBtn,
 } from "../../elements";
 import { HiAtSymbol } from "react-icons/hi";
 import { Input } from "../../elements";
 import { FaLock } from "react-icons/fa";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
 
 const LoginForm = () => {
+  const { createdUser } = useSelector((state) => state.userRegister);
+
   return (
     <>
-      <form>
+      <ToastContainer autoClose={5000} />
+
+      <Form>
         <InputFieldContainer>
           <InputHeading>Email</InputHeading>
           <InputContainer>
@@ -33,7 +39,7 @@ const LoginForm = () => {
 
         <PrimaryBtn m="0 0 1rem 0">Sign In</PrimaryBtn>
         <Link href="/">Forgot your password?</Link>
-      </form>
+      </Form>
     </>
   );
 };

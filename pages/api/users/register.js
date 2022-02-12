@@ -1,15 +1,13 @@
 import dbConnect from "../../../lib/db-connect";
 import User from "../../../models/userModel";
-import apiWrapper from "../../../lib/api/api-wrapper";
-import Exception from "../../../lib/api/exception";
+import Wrapper, { Exception } from "next-api-wrapper";
 
-export default apiWrapper(async (req, res) => {
-  if (req.method === "POST") {
+export default Wrapper({
+  POST: async (req) => {
     const { name, email, password } = req.body;
 
     if (!name || !email || !password) {
-      res.status(422).json({ message: "Invalid inputs" });
-      return;
+      throw new Exception("Invalid Inputs", 422);
     }
 
     dbConnect();
@@ -17,7 +15,13 @@ export default apiWrapper(async (req, res) => {
     const userExists = await User.findOne({ email });
 
     if (userExists) {
-      throw new Exception("User alreadt exists", 422);
+      throw new Exception("User already exists!", 409);
     }
-  }
+
+    await User.create({ name, email, password });
+
+    return {
+      message: "User created!",
+    };
+  },
 });

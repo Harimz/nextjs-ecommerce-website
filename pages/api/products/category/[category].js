@@ -1,18 +1,19 @@
 import dbConnect from "../../../../lib/db-connect";
 import Product from "../../../../models/productModel";
+import Wrapper, { Exception } from "next-api-wrapper";
 
-const handler = async (req, res) => {
-  const { category } = req.query;
+export default Wrapper({
+  GET: async (req) => {
+    const { category } = req.query;
 
-  await dbConnect();
+    dbConnect();
 
-  try {
     const products = await Product.find({ category });
 
-    res.status(200).send(products);
-  } catch (error) {
-    res.status(404).send({ status: "error", message: "Something went wrong" });
-  }
-};
+    if (!products) {
+      throw new Exception("Products not found", 404);
+    }
 
-export default handler;
+    return products;
+  },
+});
