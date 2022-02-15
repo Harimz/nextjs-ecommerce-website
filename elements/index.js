@@ -5,3 +5,4 @@ export * from "./texts";
 export * from "./containers";
 export * from "./inputs";
 export * from "./forms";
+export * from "./spinners";

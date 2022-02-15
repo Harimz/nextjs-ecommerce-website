@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaLock, FaUserAlt } from "react-icons/fa";
 import { HiAtSymbol } from "react-icons/hi";
@@ -10,43 +10,55 @@ import {
   InputFieldContainer,
   InputHeading,
   PrimaryBtn,
+  Spinner,
 } from "../../elements";
 import { signupOptions } from "../../utils";
 import { useRouter } from "next/router";
-import { useDispatch, useSelector } from "react-redux";
-import { registerUser } from "../../actions/userActions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import { errorMessage } from "../../helpers";
+import { signIn } from "next-auth/react";
 
 const SignupForm = () => {
-  const dispatch = useDispatch();
-  const { createdUser, error } = useSelector((state) => state.userRegister);
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm(signupOptions);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const submitHandler = async (user) => {
-    dispatch(
-      registerUser({
-        name: user.name,
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      setLoading(true);
+
+      const { data } = await axios.post(
+        "/api/auth/register",
+        { name: user.name, email: user.email, password: user.password },
+        config
+      );
+
+      const result = await signIn("credentials", {
+        redirect: false,
         email: user.email,
         password: user.password,
-      })
-    );
-
-    if (error) {
-      toast.error(error, {
-        position: "top-center",
       });
-    }
 
-    if (createdUser) {
-      router.replace("/login");
+      setLoading(false);
 
-      toast.success("User created!", {
+      if (!result.error) {
+        router.replace("/");
+      }
+    } catch (error) {
+      setLoading(false);
+      toast.error(errorMessage(error), {
         position: "top-center",
       });
     }
@@ -110,7 +122,7 @@ const SignupForm = () => {
         </InputFieldContainer>
 
         <PrimaryBtn m="0 0 1rem 0" type="submit">
-          Sign Up
+          {loading ? <Spinner /> : "Sign Up"}
         </PrimaryBtn>
       </Form>
     </>

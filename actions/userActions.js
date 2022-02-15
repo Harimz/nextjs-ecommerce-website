@@ -18,13 +18,14 @@ export const registerUser = (credentials) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "/api/users/register",
+      "/api/auth/register",
       credentials,
       config
     );
 
     dispatch({
       type: USER_REGISTER_SUCCESS,
+      payload: data,
     });
   } catch (error) {
     dispatch({
