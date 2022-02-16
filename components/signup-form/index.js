@@ -18,9 +18,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { errorMessage } from "../../helpers";
-import { signIn } from "next-auth/react";
+import { signIn, useSession, getSession } from "next-auth/react";
 
 const SignupForm = () => {
+  const pageLoading = status === "loading";
   const {
     handleSubmit,
     register,
@@ -28,6 +29,12 @@ const SignupForm = () => {
   } = useForm(signupOptions);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
+  const { data: session, status } = useSession();
+
+  if (pageLoading) {
+    return <p>Loading...</p>;
+  }
 
   const submitHandler = async (user) => {
     try {

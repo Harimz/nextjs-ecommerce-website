@@ -16,6 +16,7 @@ export const AuthLink = styled.a`
   transition: color 0.3s ease;
   font-weight: 600;
   font-size: 1.25rem;
+  cursor: pointer;
 
   &:hover {
     color: ${({ theme }) => theme.green[100]};

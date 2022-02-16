@@ -11,9 +11,16 @@ import {
   NavWrapper,
 } from "./styles/nav-styles";
 import MobileNav from "./mobile-nav";
+import { signOut } from "next-auth/react";
+import { useAuth } from "../../hooks";
 
 const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { session } = useAuth();
+
+  const logoutHandler = () => {
+    signOut();
+  };
 
   return (
     <Container>
@@ -27,14 +34,23 @@ const Navigation = () => {
           <Input placeholder="Search for a product" />
         </InputContainer>
 
-        <AuthContainer gap="5rem">
-          <Link passHref href="/login">
-            <AuthLink>Login</AuthLink>
-          </Link>
-          <Link passHref href="/signup">
-            <AuthLink>Signup</AuthLink>
-          </Link>
-        </AuthContainer>
+        {!session ? (
+          <AuthContainer gap="5rem">
+            <Link passHref href="/login">
+              <AuthLink>Login</AuthLink>
+            </Link>
+            <Link passHref href="/signup">
+              <AuthLink>Signup</AuthLink>
+            </Link>
+          </AuthContainer>
+        ) : (
+          <AuthContainer gap="5rem">
+            <Link passHref href="/login">
+              <AuthLink>Profile</AuthLink>
+            </Link>
+            <AuthLink onClick={logoutHandler}>Logout</AuthLink>
+          </AuthContainer>
+        )}
 
         <MenuButton onClick={() => setMenuOpen((state) => !state)}>
           <MenuButtonBurger isOpen={menuOpen} />

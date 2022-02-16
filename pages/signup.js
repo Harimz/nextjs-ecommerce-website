@@ -1,3 +1,4 @@
+import { getSession } from "next-auth/react";
 import React from "react";
 import { RiLoginCircleLine } from "react-icons/ri";
 import SignupForm from "../components/signup-form";
@@ -11,6 +12,23 @@ const SignUpPage = () => {
       <SignupForm />
     </FormContainer>
   );
+};
+
+export const getServerSideProps = async (context) => {
+  const session = await getSession({ req: context.req });
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
 };
 
 export default SignUpPage;
