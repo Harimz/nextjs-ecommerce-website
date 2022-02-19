@@ -1,12 +1,13 @@
 import dbConnect from "../../../lib/db-connect";
 import Product from "../../../models/productModel";
+import Wrapper from "next-api-wrapper";
 
-const handler = async (req, res) => {
-  await dbConnect();
+export default Wrapper({
+  GET: async (req) => {
+    dbConnect();
 
-  const products = await Product.find({ category: "console" });
+    const products = await Product.find({});
 
-  res.status(200).send({ status: "success", data: products });
-};
-
-export default handler;
+    return products;
+  },
+});

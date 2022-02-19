@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const FooterContainer = styled.footer`
+  margin-top: 15rem;
+  background: ${({ theme }) => theme.gray[500]};
+`;
+
 export const FooterWrapper = styled.div`
   max-width: 125rem;
   width: 90%;

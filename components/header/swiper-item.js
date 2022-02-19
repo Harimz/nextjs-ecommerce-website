@@ -1,13 +1,11 @@
 import React from "react";
 import Image from "next/image";
+import { Heading, PrimaryBtn, SubHeading, Text } from "../../elements";
 import {
-  Heading,
-  PrimaryBtn,
-  SubHeading,
+  ItemContent,
+  SwiperImage,
   SwiperItemContainer,
-  Text,
-} from "../../elements";
-import { ItemContent, SwiperImage } from "./styles/swiper-item-styles";
+} from "./styles/swiper-item-styles";
 
 const SwiperItem = ({ title, text, img, price }) => {
   return (

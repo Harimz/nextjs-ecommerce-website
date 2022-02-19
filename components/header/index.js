@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import SwiperItem from "./swiper-item";
 import { FEATURED_ITEMS } from "../../constants";
-import { HeaderContainer } from "../../elements";
+import { HeaderContainer } from "./styles/header-styles";
 
 const Header = () => {
   SwiperCore.use([Autoplay]);

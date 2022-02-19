@@ -1,5 +1,20 @@
 import styled from "styled-components";
 
+export const SwiperItemContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 5rem;
+
+  @media (max-width: 1030px) {
+    padding: 0;
+  }
+
+  @media (max-width: 960px) {
+    padding: 0;
+    flex-direction: column-reverse;
+  }
+`;
+
 export const ItemContent = styled.div`
   width: 40%;
 

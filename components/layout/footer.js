@@ -1,8 +1,9 @@
 import Link from "next/link";
 import React from "react";
-import { FooterContainer, Heading, Text } from "../../elements";
+import { Heading, Text } from "../../elements";
 import {
   FooterWrapper,
+  FooterContainer,
   List,
   ListItem,
   ListLink,

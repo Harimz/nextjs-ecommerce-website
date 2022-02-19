@@ -20,47 +20,7 @@ export const BrowseContainer = styled.div`
   }
 `;
 
-/* Header Containers */
-
-export const HeaderContainer = styled.header`
-  position: relative;
-  display: flex;
-  z-index: 1;
-
-  .swiper {
-    width: 80%;
-    margin-left: 3rem;
-  }
-
-  @media (max-width: 1050px) {
-    .swiper {
-      width: 100%;
-      margin: 0;
-    }
-  }
-`;
-
-export const SwiperItemContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 5rem;
-
-  @media (max-width: 1030px) {
-    padding: 0;
-  }
-
-  @media (max-width: 960px) {
-    padding: 0;
-    flex-direction: column-reverse;
-  }
-`;
-
 /* Layout Containers */
-
-export const FooterContainer = styled.footer`
-  margin-top: 15rem;
-  background: ${({ theme }) => theme.gray[500]};
-`;
 
 export const InputContainer = styled.div`
   position: relative;
