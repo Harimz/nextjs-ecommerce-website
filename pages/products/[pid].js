@@ -5,7 +5,7 @@ import { Container } from "../../elements";
 
 const ProductPage = ({ product }) => {
   return (
-    <Container>
+    <Container mt="3rem">
       <ProductDetails product={product} />
     </Container>
   );

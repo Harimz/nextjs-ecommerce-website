@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
 export const DisplayWrapper = styled(motion.div)`
   display: grid;
@@ -35,4 +35,10 @@ export const Favorite = styled.div`
     color: ${({ theme }) => theme.gray[100]};
     font-size: 1.5rem;
   }
+`;
+
+export const CardContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  grid-gap: 0.5rem;
 `;

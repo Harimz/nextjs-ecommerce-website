@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { CATEGORIES } from "../../constants";
-import { Heading, SubHeading } from "../../elements/headings";
 import {
   BrowseMenu,
   BrowseMenuItem,
@@ -9,14 +8,14 @@ import {
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import Link from "next/link";
 import { FaLongArrowAltRight } from "react-icons/fa";
-import { BrowseContainer } from "../../elements";
+import { BrowseContainer, MainHeading, ThinHeading } from "../../elements";
 
 const HeaderCategories = () => {
   const [isHovering, setIsHovering] = useState(-1);
 
   return (
     <BrowseContainer>
-      <Heading size="1.75rem">Browse Categories</Heading>
+      <MainHeading>Browse Categories</MainHeading>
 
       <BrowseMenu>
         {CATEGORIES.map((category, i) => (
@@ -28,7 +27,7 @@ const HeaderCategories = () => {
             <MdCheckBoxOutlineBlank className="square" />
 
             <Link passHref href={`/categories/${category.name.toLowerCase()}`}>
-              <SubHeading>{category.name}</SubHeading>
+              <ThinHeading>{category.name}</ThinHeading>
             </Link>
 
             <BrowseMenuItemBox isVisible={isHovering === i}>

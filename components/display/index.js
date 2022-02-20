@@ -1,13 +1,18 @@
 import React from "react";
-import { DangerHeading, Heading, ProductCard, Text } from "../../elements";
 import {
+  DangerHeading,
+  MainHeading,
+  ProductCard,
+  Text,
+  ThinHeading,
+} from "../../elements";
+import {
+  CardContent,
   DisplayWrapper,
   ExploreBox,
-  Favorite,
   ProductHeader,
-  ProductInfoContainer,
 } from "./styles/display-styles";
-import { FaArrowRight, FaRegHeart } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
 import { displayChildVariants, displayVariants } from "../../utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,7 +22,7 @@ const DisplayProducts = ({ products, amount, title }) => {
     <>
       {amount === 5 && (
         <ProductHeader>
-          <Heading size="1.75rem">{title}</Heading>
+          <ThinHeading size="1.75rem">{title}</ThinHeading>
           <ExploreBox>
             <Text>Explore More</Text>
             <FaArrowRight />
@@ -40,13 +45,13 @@ const DisplayProducts = ({ products, amount, title }) => {
                   layout="fill"
                 />
               </div>
-              <div>
+              <CardContent>
                 <Text>{product.subCategory.toUpperCase()}</Text>
-                <Heading size="1.25rem" m="0.5rem 0">
+                <MainHeading size="1.25rem" m="0.5rem 0">
                   {product.name}
-                </Heading>
+                </MainHeading>
                 <DangerHeading size="1.25rem">${product.price}</DangerHeading>
-              </div>
+              </CardContent>
             </ProductCard>
           </Link>
         ))}
