@@ -6,18 +6,10 @@ export const DefaultBtn = styled.button`
   font-weight: 600;
   margin: ${({ m }) => m};
   font-size: 1rem;
-  width: ${({ w }) => (w ? w : "100%")};
+  border: 0;
+  width: ${({ w }) => w};
 
   transition: all 0.3s ease-in;
-
-  &:hover {
-    transform: scale(0.95);
-    box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.5);
-  }
-
-  &:active {
-    transform: scale(1);
-  }
 `;
 
 export const TransparentBtn = styled(DefaultBtn)`
@@ -33,6 +25,15 @@ export const PrimaryBtn = styled(DefaultBtn)`
   font-weight: 600;
   border: none;
   border-radius: 0.5rem;
+
+  &:hover {
+    transform: scale(0.99);
+    box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.5);
+  }
+
+  &:active {
+    transform: scale(1);
+  }
 `;
 
 export const AddButton = styled.button`
@@ -42,7 +43,7 @@ export const AddButton = styled.button`
   grid-gap: 1rem;
   background: ${({ theme }) => theme.green[200]};
   cursor: pointer;
-  border-radius: 0.75rem;
+  border-radius: 0.5rem;
   transition: all 0.3s ease;
   color: white;
   border: none;
@@ -54,5 +55,17 @@ export const AddButton = styled.button`
 
   &:hover {
     filter: brightness(90%);
+  }
+`;
+
+export const ClearButton = styled(DefaultBtn)`
+  display: flex;
+  align-items: center;
+  background: transparent;
+  grid-gap: 1rem;
+  border-radius: 0.5rem;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.1);
   }
 `;

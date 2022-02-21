@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   AddButton,
+  ClearButton,
   InfoHeading,
   MainHeading,
   Text,
@@ -19,6 +20,7 @@ import { HiOutlineMinusSm } from "react-icons/hi";
 import { BsBagPlus } from "react-icons/bs";
 import { useAuth } from "../../hooks";
 import { useRouter } from "next/router";
+import { FaHeart } from "react-icons/fa";
 
 const ProductCartDetails = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
@@ -64,8 +66,12 @@ const ProductCartDetails = ({ product }) => {
           }
         >
           <BsBagPlus className="cart-icon" />
-          <p>Add To Cart</p>
+          Add To Cart
         </AddButton>
+        <ClearButton>
+          <FaHeart />
+          Add To Wishlist
+        </ClearButton>
       </AddContainer>
     </CartDetailsContainer>
   );

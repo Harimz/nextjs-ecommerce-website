@@ -78,7 +78,7 @@ const LoginForm = () => {
           </ErrorText>
         </InputFieldContainer>
 
-        <PrimaryBtn m="0 0 1rem 0" type="submit">
+        <PrimaryBtn m="0 0 1rem 0" type="submit" w="100%">
           {loading ? <Spinner /> : "Sign In"}
         </PrimaryBtn>
         <Link href="/">Forgot your password?</Link>

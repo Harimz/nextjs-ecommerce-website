@@ -1,5 +1,6 @@
 import React from "react";
 import ProductDetails from "../../components/product-details";
+import ProductInfo from "../../components/product-info";
 import { server } from "../../config";
 import { Container } from "../../elements";
 
@@ -7,6 +8,7 @@ const ProductPage = ({ product }) => {
   return (
     <Container mt="3rem">
       <ProductDetails product={product} />
+      <ProductInfo product={product} />
     </Container>
   );
 };

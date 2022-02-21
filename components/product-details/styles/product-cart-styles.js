@@ -6,6 +6,14 @@ export const CartDetailsContainer = styled.div`
   display: flex;
   flex-direction: column;
   grid-gap: 2rem;
+
+  @media (max-width: 885px) {
+    width: 100%;
+  }
+
+  @media (max-width: 450px) {
+    padding: 0.5rem;
+  }
 `;
 
 export const AddInputContainer = styled.div`
@@ -29,4 +37,11 @@ export const Control = styled.div`
   }
 `;
 
-export const AddContainer = styled.div``;
+export const AddContainer = styled.div`
+  display: flex;
+  grid-gap: 3rem;
+
+  @media (max-width: 450px) {
+    flex-direction: column;
+  }
+`;
