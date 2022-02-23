@@ -25,19 +25,13 @@ const HomePage = ({ consoleList, laptopList, monitorList }) => {
 };
 
 export const getStaticProps = async () => {
-  const consoleRes = await fetch(
-    `${process.env.VERCEL_URL}/api/products/category/console`
-  );
+  const consoleRes = await fetch(`${server}/api/products/category/console`);
   const consoleData = await consoleRes.json();
 
-  const laptopRes = await fetch(
-    `${process.env.VERCEL_URL}/api/products/category/laptop`
-  );
+  const laptopRes = await fetch(`${server}/api/products/category/laptop`);
   const laptopData = await laptopRes.json();
 
-  const monitorRes = await fetch(
-    `${process.env.VERCEL_URL}/api/products/category/monitor`
-  );
+  const monitorRes = await fetch(`${server}/api/products/category/monitor`);
   const monitorData = await monitorRes.json();
 
   return {
