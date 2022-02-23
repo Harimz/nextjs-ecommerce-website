@@ -25,9 +25,11 @@ import {
   Input,
 } from "../../elements";
 import { backdropVariants, menuVariants } from "../../utils";
+import { useAuth } from "../../hooks";
 
 const MobileNav = ({ menuOpen }) => {
   const [moreDetails, setMoreDetails] = useState(-1);
+  const { session } = useAuth();
 
   return (
     <AnimatePresence>
@@ -81,10 +83,19 @@ const MobileNav = ({ menuOpen }) => {
               <Input />
             </InputContainer>
 
-            <AuthContainer>
-              <TransparentBtn>Login</TransparentBtn>
-              <PrimaryBtn>Sign Up</PrimaryBtn>
-            </AuthContainer>
+            {!session && (
+              <AuthContainer>
+                <TransparentBtn>Login</TransparentBtn>
+                <PrimaryBtn>Sign Up</PrimaryBtn>
+              </AuthContainer>
+            )}
+
+            {session && (
+              <AuthContainer>
+                <TransparentBtn>Profile</TransparentBtn>
+                <PrimaryBtn>Logout</PrimaryBtn>
+              </AuthContainer>
+            )}
           </Menu>
         </Backdrop>
       )}

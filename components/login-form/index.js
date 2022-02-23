@@ -43,7 +43,6 @@ const LoginForm = () => {
       }
     } catch (error) {
       setLoading(false);
-      console.log(error);
     }
   };
 

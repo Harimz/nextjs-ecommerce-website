@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import {
   AddButton,
   ClearButton,
+  Heading,
   InfoHeading,
-  MainHeading,
   Text,
-  ThinHeading,
-  TransparentBtn,
 } from "../../elements";
 import {
   AddContainer,
@@ -29,12 +27,14 @@ const ProductCartDetails = ({ product }) => {
 
   return (
     <CartDetailsContainer>
-      <MainHeading>{product.name}</MainHeading>
+      <Heading fw="700">{product.name}</Heading>
       <InfoHeading>${product.price}</InfoHeading>
       <Text>{product.description}</Text>
 
       <AddInputContainer>
-        <ThinHeading>Quantity</ThinHeading>
+        <Heading size="1.5rem" fw="400">
+          Quantity
+        </Heading>
 
         <AddInput>
           <Control

@@ -21,8 +21,6 @@ const ProductInfo = ({ product }) => {
     setActiveTab(x);
   };
 
-  console.log(entries);
-
   return (
     <ProductInfoContainer>
       <TabsContainer>

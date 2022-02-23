@@ -4,10 +4,18 @@ import { RiLoginCircleLine } from "react-icons/ri";
 import Link from "next/link";
 import LoginForm from "../components/login-form";
 import { getSession } from "next-auth/react";
+import Head from "next/head";
 
 const LoginPage = ({ session }) => {
   return (
     <FormContainer>
+      <Head>
+        <title>Log In</title>
+        <meta
+          name="description"
+          content="Already have an account? Log in now"
+        />
+      </Head>
       <RiLoginCircleLine className="icon" />
       <Heading fw="800">Login to your account</Heading>
       <Text>

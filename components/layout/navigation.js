@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import { Container, InputContainer, Input } from "../../elements";
+import { InputContainer, Input } from "../../elements";
 import { Heading } from "../../elements/headings";
 import { FaSearch } from "react-icons/fa";
 import {
@@ -8,22 +8,34 @@ import {
   AuthLink,
   MenuButton,
   MenuButtonBurger,
+  NavContainer,
   NavWrapper,
 } from "./styles/nav-styles";
 import MobileNav from "./mobile-nav";
 import { signOut } from "next-auth/react";
-import { useAuth } from "../../hooks";
+import { useAuth, useScrollDirection } from "../../hooks";
+import { useEffect } from "react";
 
 const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { session } = useAuth();
+  const { scrollDirection } = useScrollDirection();
+  const scrollingUp = scrollDirection === "UP";
 
   const logoutHandler = () => {
     signOut();
   };
 
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "visible";
+    }
+  }, [menuOpen]);
+
   return (
-    <Container>
+    <NavContainer scrollingUp={scrollingUp}>
       <NavWrapper>
         <Link passHref href="/">
           <Heading type="pointer">Shigeo</Heading>
@@ -58,7 +70,7 @@ const Navigation = () => {
       </NavWrapper>
 
       <MobileNav menuOpen={menuOpen} setIsOpen={setMenuOpen} />
-    </Container>
+    </NavContainer>
   );
 };
 

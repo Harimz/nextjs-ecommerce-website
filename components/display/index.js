@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  DangerHeading,
-  MainHeading,
-  ProductCard,
-  Text,
-  ThinHeading,
-} from "../../elements";
+import { DangerHeading, Heading, ProductCard, Text } from "../../elements";
 import {
   CardContent,
   DisplayWrapper,
@@ -22,7 +16,9 @@ const DisplayProducts = ({ products, amount, title }) => {
     <>
       {amount === 5 && (
         <ProductHeader>
-          <ThinHeading size="1.75rem">{title}</ThinHeading>
+          <Heading size="1.75rem" fw="400">
+            {title}
+          </Heading>
           <ExploreBox>
             <Text>Explore More</Text>
             <FaArrowRight />
@@ -47,9 +43,9 @@ const DisplayProducts = ({ products, amount, title }) => {
               </div>
               <CardContent>
                 <Text>{product.subCategory.toUpperCase()}</Text>
-                <MainHeading size="1.25rem" m="0.5rem 0">
+                <Heading size="1.25rem" fw="700" m="0.5rem 0">
                   {product.name}
-                </MainHeading>
+                </Heading>
                 <DangerHeading size="1.25rem">${product.price}</DangerHeading>
               </CardContent>
             </ProductCard>

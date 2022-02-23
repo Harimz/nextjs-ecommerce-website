@@ -1,4 +1,16 @@
 import styled from "styled-components";
+import { Container } from "../../../elements";
+
+export const NavContainer = styled(Container)`
+  position: sticky;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 999;
+  transition: all 0.2s ease-in-out;
+  transform: translateY(${({ scrollingUp }) => (scrollingUp ? "0" : "-10rem")});
+  background: white;
+`;
 
 export const NavWrapper = styled.div`
   display: flex;
