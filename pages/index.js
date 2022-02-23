@@ -17,28 +17,28 @@ const HomePage = ({ consoleList, laptopList, monitorList }) => {
       </Head>
       <Header />
       <Info />
-      {/* <DisplayProducts products={consoleList} amount={5} title="Consoles" />
+      <DisplayProducts products={consoleList} amount={5} title="Consoles" />
       <DisplayProducts products={laptopList} amount={5} title="Laptops" />
-      <DisplayProducts products={monitorList} amount={5} title="Monitors" /> */}
+      <DisplayProducts products={monitorList} amount={5} title="Monitors" />
     </Container>
   );
 };
 
 export const getStaticProps = async () => {
-  // const consoleRes = await fetch(`${server}/api/products/category/console`);
-  // const consoleData = await consoleRes.json();
+  const consoleRes = await fetch(`${server}/api/products/category/console`);
+  const consoleData = await consoleRes.json();
 
-  // const laptopRes = await fetch(`${server}/api/products/category/laptop`);
-  // const laptopData = await laptopRes.json();
+  const laptopRes = await fetch(`${server}/api/products/category/laptop`);
+  const laptopData = await laptopRes.json();
 
-  // const monitorRes = await fetch(`${server}/api/products/category/monitor`);
-  // const monitorData = await monitorRes.json();
+  const monitorRes = await fetch(`${server}/api/products/category/monitor`);
+  const monitorData = await monitorRes.json();
 
   return {
     props: {
-      // consoleList: consoleData,
-      // laptopList: laptopData,
-      // monitorList: monitorData,
+      consoleList: consoleData,
+      laptopList: laptopData,
+      monitorList: monitorData,
     },
   };
 };
