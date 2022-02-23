@@ -18,7 +18,9 @@ export const getStaticProps = async (context) => {
 
   const productId = params.pid;
 
-  const productRes = await fetch(`${server}/api/products/${productId}`);
+  const productRes = await fetch(
+    `${process.env.VERCEL_URL}/api/products/${productId}`
+  );
   const productData = await productRes.json();
 
   return {
@@ -29,7 +31,7 @@ export const getStaticProps = async (context) => {
 };
 
 export const getStaticPaths = async () => {
-  const productsRes = await fetch(`${server}/api/products`);
+  const productsRes = await fetch(`${process.env.VERCEL_URL}/api/products`);
   const productsData = await productsRes.json();
 
   const productPaths = productsData.map((product) => ({
