@@ -19,7 +19,7 @@ export const getStaticProps = async (context) => {
   const productId = params.pid;
 
   const productRes = await fetch(
-    `${process.env.VERCEL_URL}/api/products/${productId}`
+    `http://shigeo-ecommerce.vercel.app/api/products/${productId}`
   );
   const productData = await productRes.json();
 
