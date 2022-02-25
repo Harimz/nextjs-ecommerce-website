@@ -18,7 +18,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { errorMessage } from "../../helpers";
-import { signIn, useSession, getSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 const SignupForm = () => {
   const pageLoading = status === "loading";
