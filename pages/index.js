@@ -26,17 +26,17 @@ const HomePage = ({ consoleList, laptopList, monitorList }) => {
 
 export const getStaticProps = async () => {
   const consoleRes = await fetch(
-    `$http://shigeo-ecommerce.vercel.app/api/products/category/console`
+    `http://shigeo-ecommerce.vercel.app/api/products/category/console`
   );
   const consoleData = await consoleRes.json();
 
   const laptopRes = await fetch(
-    `$http://shigeo-ecommerce.vercel.app/api/products/category/laptop`
+    `http://shigeo-ecommerce.vercel.app/api/products/category/laptop`
   );
   const laptopData = await laptopRes.json();
 
   const monitorRes = await fetch(
-    `$http://shigeo-ecommerce.vercel.app/api/products/category/monitor`
+    `http://shigeo-ecommerce.vercel.app/api/products/category/monitor`
   );
   const monitorData = await monitorRes.json();
 
