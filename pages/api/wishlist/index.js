@@ -5,6 +5,8 @@ export default Wrapper({
   GET: async (req) => {
     const session = await getSession({ req });
 
+    console.log(session);
+
     if (!session) {
       throw new Exception("Not authorized", 401);
     }
