@@ -22,7 +22,9 @@ import { FaHeart } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../actions/cartActions";
 import axios from "axios";
-import { getSession } from "next-auth/react";
+import { toast } from "react-toastify";
+import { errorMessage } from "../../helpers";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProductCartDetails = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
@@ -36,24 +38,29 @@ const ProductCartDetails = ({ product }) => {
 
   const addToWishlistHandler = async () => {
     try {
-      console.log("hello");
-      const { data } = axios.post(
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const { data } = await axios.post(
         "/api/wishlist",
         {
           product: product._id,
-          image: product.images[0],
           price: product.price,
+          image: product.images[0],
         },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+        config
       );
 
-      console.log(data);
+      toast.success(data.message, {
+        position: "top-center",
+      });
     } catch (error) {
-      console.log(error);
+      toast.error(errorMessage(error), {
+        position: "top-center",
+      });
     }
   };
 

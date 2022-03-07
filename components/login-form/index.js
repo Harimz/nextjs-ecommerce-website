@@ -12,12 +12,12 @@ import { HiAtSymbol } from "react-icons/hi";
 import { Input } from "../../elements";
 import { FaLock } from "react-icons/fa";
 import Link from "next/link";
-import { ToastContainer } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { loginOptions } from "../../utils";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
-import { useProtectedRoute } from "../../hooks";
+import { toast } from "react-toastify";
+import { errorMessage } from "../../helpers";
 
 const LoginForm = () => {
   const {
@@ -43,46 +43,45 @@ const LoginForm = () => {
       }
     } catch (error) {
       setLoading(false);
+      toast.error(errorMessage(error), {
+        position: "top-center",
+      });
     }
   };
 
   return (
-    <>
-      <ToastContainer autoClose={5000} />
+    <Form onSubmit={handleSubmit(submitHandler)}>
+      <InputFieldContainer>
+        <InputHeading>Email</InputHeading>
+        <InputContainer className={errors.email && "error"}>
+          <HiAtSymbol className="input-icon" />
+          <Input placeholder="johndoe@example.com" {...register("email")} />
+        </InputContainer>
 
-      <Form onSubmit={handleSubmit(submitHandler)}>
-        <InputFieldContainer>
-          <InputHeading>Email</InputHeading>
-          <InputContainer className={errors.email && "error"}>
-            <HiAtSymbol className="input-icon" />
-            <Input placeholder="johndoe@example.com" {...register("email")} />
-          </InputContainer>
+        <ErrorText error={errors.email}>{errors.email?.message}</ErrorText>
+      </InputFieldContainer>
 
-          <ErrorText error={errors.email}>{errors.email?.message}</ErrorText>
-        </InputFieldContainer>
+      <InputFieldContainer>
+        <InputHeading>Password</InputHeading>
+        <InputContainer className={errors.password && "error"}>
+          <FaLock className="input-icon" />
+          <Input
+            type="password"
+            placeholder="Password"
+            {...register("password")}
+          />
+        </InputContainer>
 
-        <InputFieldContainer>
-          <InputHeading>Password</InputHeading>
-          <InputContainer className={errors.password && "error"}>
-            <FaLock className="input-icon" />
-            <Input
-              type="password"
-              placeholder="Password"
-              {...register("password")}
-            />
-          </InputContainer>
+        <ErrorText error={errors.password}>
+          {errors.password?.message}
+        </ErrorText>
+      </InputFieldContainer>
 
-          <ErrorText error={errors.password}>
-            {errors.password?.message}
-          </ErrorText>
-        </InputFieldContainer>
-
-        <PrimaryBtn m="0 0 1rem 0" type="submit" w="100%">
-          {loading ? <Spinner /> : "Sign In"}
-        </PrimaryBtn>
-        <Link href="/">Forgot your password?</Link>
-      </Form>
-    </>
+      <PrimaryBtn m="0 0 1rem 0" type="submit" w="100%">
+        {loading ? <Spinner /> : "Sign In"}
+      </PrimaryBtn>
+      <Link href="/">Forgot your password?</Link>
+    </Form>
   );
 };
 

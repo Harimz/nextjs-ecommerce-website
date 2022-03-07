@@ -59,3 +59,37 @@ export const ListItem = styled.li`
     }
   }
 `;
+
+export const InputTextContainer = styled.div`
+  /* display: flex; */
+`;
+
+export const TextInput = styled.input`
+  padding: 1rem;
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid grey;
+  outline: none;
+  transition: all 0.3s ease;
+
+  &:focus {
+    outline: 1px solid ${({ theme }) => theme.green[100]};
+  }
+`;
+
+export const OptionsContainer = styled.div`
+  display: flex;
+  margin-top: 1rem;
+  grid-gap: 2rem;
+  justify-content: flex-end;
+
+  @media (max-width: 350px) {
+    flex-direction: column;
+
+    button {
+      width: 100%;
+      padding: 1rem;
+      justify-content: center;
+    }
+  }
+`;
