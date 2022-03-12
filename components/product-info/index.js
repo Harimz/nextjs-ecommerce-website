@@ -1,28 +1,20 @@
 import React, { useState } from "react";
-import { ClearButton, Heading, PrimaryBtn, Text } from "../../elements";
-import { useAuth } from "../../hooks";
+import { Heading, Text } from "../../elements";
 import {
-  InputTextContainer,
   List,
   ListItem,
-  OptionsContainer,
   ProductInfoContainer,
   Tab,
   TabsContainer,
-  TextInput,
 } from "./styles/product-info-styles";
+import Review from "./review";
+import Question from "./question";
 import { useRouter } from "next/router";
 
 const ProductInfo = ({ product }) => {
-  const { session } = useAuth();
-  const router = useRouter();
   const [activeTab, setActiveTab] = useState(0);
-  const [askQuestion, setAskQuestion] = useState(false);
-  const [writeReview, setWriteReview] = useState(false);
-  const [userInputs, setUserInputs] = useState({
-    question: "",
-    review: "",
-  });
+  const router = useRouter();
+  const { pid } = router.query;
 
   const entries = Object.entries(product.specs);
 
@@ -53,70 +45,8 @@ const ProductInfo = ({ product }) => {
           ))}
         </List>
       )}
-      {activeTab === 1 && (
-        <>
-          {askQuestion ? (
-            <InputTextContainer>
-              <TextInput
-                placeholder="Write a question"
-                onChange={({ target }) =>
-                  setUserInputs((state) => ({
-                    ...state,
-                    question: target.value,
-                  }))
-                }
-              />
-
-              <OptionsContainer>
-                <PrimaryBtn p="0.5rem">Ask Question</PrimaryBtn>
-                <ClearButton onClick={() => setAskQuestion(false)}>
-                  Cancel
-                </ClearButton>
-              </OptionsContainer>
-            </InputTextContainer>
-          ) : (
-            <ClearButton
-              onClick={() =>
-                session ? setAskQuestion(true) : router.replace("/login")
-              }
-            >
-              Ask Question
-            </ClearButton>
-          )}
-        </>
-      )}
-      {activeTab === 2 && (
-        <>
-          {writeReview ? (
-            <InputTextContainer>
-              <TextInput
-                placeholder="Write a review"
-                onChange={({ target }) =>
-                  setUserInputs((state) => ({
-                    ...state,
-                    review: target.value,
-                  }))
-                }
-              />
-
-              <OptionsContainer>
-                <PrimaryBtn p="0.5rem">Write a review</PrimaryBtn>
-                <ClearButton onClick={() => setWriteReview(false)}>
-                  Cancel
-                </ClearButton>
-              </OptionsContainer>
-            </InputTextContainer>
-          ) : (
-            <ClearButton
-              onClick={() =>
-                session ? setWriteReview(true) : router.replace("/login")
-              }
-            >
-              Ask Question
-            </ClearButton>
-          )}
-        </>
-      )}
+      {activeTab === 1 && <Question product={pid} />}
+      {activeTab === 2 && <Review product={pid} />}
     </ProductInfoContainer>
   );
 };
