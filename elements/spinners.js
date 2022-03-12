@@ -20,3 +20,24 @@ export const Spinner = styled.div`
     }
   }
 `;
+
+export const GreenSpinner = styled.div`
+  display: flex;
+  justify-content: center;
+
+  &::after {
+    content: "";
+    width: 1rem;
+    height: 1rem;
+    border: 5px solid transparent;
+    border-top-color: ${({ theme }) => theme.green[200]};
+    border-radius: 50%;
+    animation: loading 1s linear infinite;
+  }
+
+  @keyframes loading {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+`;

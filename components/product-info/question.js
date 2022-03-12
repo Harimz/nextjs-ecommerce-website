@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { ClearButton, PrimaryBtn } from "../../elements";
+import { ClearButton, GreenSpinner, PrimaryBtn } from "../../elements";
 import { useAuth } from "../../hooks";
 import {
   InputTextContainer,
   OptionsContainer,
   TextInput,
 } from "./styles/product-info-styles";
+import UserCard from "./user-card";
+import { useRouter } from "next/router";
 
 const Question = ({ product }) => {
   const [askQuestion, setAskQuestion] = useState(false);
   const [userQuestion, setUserQuestion] = useState("");
   const [questionList, setQuestionList] = useState([]);
-  const [questionLoading, setQuestionLoading] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const { session } = useAuth();
+  const router = useRouter();
 
   const setQuestionHandler = async () => {
     const config = {
@@ -22,24 +25,35 @@ const Question = ({ product }) => {
       },
     };
 
+    setIsLoading(true);
+
     const { data } = await axios.post(
       "/api/product/questions",
       { userQuestion, product },
       config
     );
+
+    if (data) {
+      setIsLoading(false);
+      setAskQuestion(false);
+    }
   };
 
   useEffect(() => {
+    const controller = new AbortController();
+
     const getQuestionList = async () => {
-      const { data } = await axios.get(`/api/product/questions/${product}`);
+      const { data } = await axios.get(`/api/product/questions/${product}`, {
+        signal: controller.signal,
+      });
 
       setQuestionList(data);
     };
 
     getQuestionList();
 
-    return () => {};
-  }, [setQuestionHandler]);
+    return () => controller.abort();
+  }, [isLoading]);
 
   return (
     <>
@@ -69,9 +83,17 @@ const Question = ({ product }) => {
         </ClearButton>
       )}
 
-      {questionList.map((question) => (
-        <p>{question.userQuestion}</p>
-      ))}
+      {isLoading ? (
+        <GreenSpinner />
+      ) : (
+        questionList.map((question) => (
+          <UserCard
+            key={question._id}
+            username={question.username}
+            text={question.userQuestion}
+          />
+        ))
+      )}
     </>
   );
 };

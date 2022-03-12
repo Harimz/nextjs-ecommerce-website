@@ -18,6 +18,7 @@ export default Wrapper({
       product,
       userQuestion,
       user: user._id,
+      username: user.name,
     });
 
     return question;
