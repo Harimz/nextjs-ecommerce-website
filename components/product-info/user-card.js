@@ -1,13 +1,14 @@
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
 import { Heading, Text } from "../../elements";
+import { useAuth } from "../../hooks";
 import {
   ContentContainer,
   ProfilePic,
   UserCardContainer,
 } from "./styles/user-card-styles";
 
-const UserCard = ({ username, text }) => {
+const UserCard = ({ username, text, user }) => {
   return (
     <UserCardContainer>
       <ProfilePic>

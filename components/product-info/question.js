@@ -91,6 +91,7 @@ const Question = ({ product }) => {
             key={question._id}
             username={question.username}
             text={question.userQuestion}
+            user={question.user}
           />
         ))
       )}
