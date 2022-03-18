@@ -12,6 +12,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 const DisplayProducts = ({ products, amount, title }) => {
+  console.log(products);
+
   return (
     <>
       {amount === 5 && (
@@ -39,6 +41,7 @@ const DisplayProducts = ({ products, amount, title }) => {
                   src={product.images[0]}
                   alt={product.name}
                   layout="fill"
+                  priority
                 />
               </div>
               <CardContent>

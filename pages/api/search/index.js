@@ -6,6 +6,8 @@ export default Wrapper({
   GET: async (req) => {
     const { searchQuery, category, price } = req.query;
 
+    await dbConnect();
+
     const filters = {};
 
     if (searchQuery) filters.tags = searchQuery;

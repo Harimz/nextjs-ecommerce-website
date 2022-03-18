@@ -7,6 +7,7 @@ export const useFilter = () => {
   const { category, searchQuery, price } = params;
 
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -24,13 +25,19 @@ export const useFilter = () => {
         arr.push(`price=${price}`);
       }
 
+      setIsLoading(true);
+
       const response = await fetch(`/api/search?${arr.join("&")}`);
 
       const content = await response.json();
 
-      setProducts(content);
+      if (content.length !== 0) {
+        setIsLoading(false);
+
+        setProducts(content);
+      }
     })();
   }, [searchQuery, category, price]);
 
-  return { products };
+  return { products, isLoading };
 };
