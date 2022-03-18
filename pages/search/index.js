@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { server } from "../../config";
 import { useFilter } from "../../hooks/useFilter";
 import { Container, GreenSpinner } from "../../elements";
 import DisplayProducts from "../../components/display";
