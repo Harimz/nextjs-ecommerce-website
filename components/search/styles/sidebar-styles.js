@@ -36,6 +36,7 @@ export const CategoryList = styled.ul`
 export const ListItem = styled.li`
   cursor: pointer;
   transition: all 0.2s ease-in;
+  color: ${({ selected, theme }) => selected && theme.green[100]};
 
   &:hover {
     color: ${({ theme }) => theme.green[100]};

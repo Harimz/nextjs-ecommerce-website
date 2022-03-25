@@ -10,9 +10,11 @@ import { FaArrowRight } from "react-icons/fa";
 import { displayChildVariants, displayVariants } from "../../utils";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const DisplayProducts = ({ products, amount, title }) => {
-  console.log(products);
+  const router = useRouter();
+  const category = products[0]?.category;
 
   return (
     <>
@@ -22,7 +24,16 @@ const DisplayProducts = ({ products, amount, title }) => {
             {title}
           </Heading>
           <ExploreBox>
-            <Text>Explore More</Text>
+            <Text
+              onClick={() => {
+                router.push({
+                  pathname: "/search",
+                  query: { category },
+                });
+              }}
+            >
+              Explore More
+            </Text>
             <FaArrowRight />
           </ExploreBox>
         </ProductHeader>

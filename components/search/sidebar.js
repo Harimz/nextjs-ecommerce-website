@@ -10,11 +10,14 @@ import {
   SidebarContainer,
 } from "./styles/sidebar-styles";
 import { FaPlus, FaMinus } from "react-icons/fa";
+import { useRouter } from "next/router";
 
 const Sidebar = () => {
   const [sliderValue, setSliderValue] = useState(0);
   const [displaySlider, setDisplaySlider] = useState(false);
-  const [displayList, setDisplayList] = useState(false);
+  const [displayList, setDisplayList] = useState(true);
+  const router = useRouter();
+  const { query } = router;
 
   const categories = [
     "Console",
@@ -26,6 +29,18 @@ const Sidebar = () => {
   ];
 
   let perc = sliderValue / 50 + "%";
+
+  const updateSearchQuery = (category) => {
+    if (category.toLowerCase() === query.category) {
+      router.push({
+        query: {},
+      });
+    } else {
+      router.push({
+        query: { category: category.toLowerCase() },
+      });
+    }
+  };
 
   return (
     <SidebarContainer>
@@ -58,7 +73,15 @@ const Sidebar = () => {
           onChange={({ target }) => setSliderValue(target.value)}
           value={sliderValue}
         />
-        <PrimaryBtn>Apply</PrimaryBtn>
+        <PrimaryBtn
+          onClick={() => {
+            router.replace({
+              query: { ...router.query, maxPrice: sliderValue },
+            });
+          }}
+        >
+          Apply
+        </PrimaryBtn>
       </RangeWrapper>
 
       <CategoryWrapper>
@@ -71,7 +94,15 @@ const Sidebar = () => {
 
       <CategoryList displayList={displayList}>
         {categories.map((category, i) => (
-          <ListItem key={i}>{category}</ListItem>
+          <ListItem
+            key={i}
+            onClick={() => {
+              updateSearchQuery(category);
+            }}
+            selected={category.toLowerCase() === query.category}
+          >
+            {category}
+          </ListItem>
         ))}
       </CategoryList>
     </SidebarContainer>

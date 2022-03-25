@@ -4,12 +4,14 @@ import { useRouter } from "next/router";
 export const useFilter = () => {
   const router = useRouter();
   const params = router.query;
-  const { category, searchQuery, price } = params;
+  const { category, searchQuery, maxPrice } = params;
 
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    const abortController = new AbortController();
+
     (async () => {
       const arr = [];
 
@@ -21,8 +23,8 @@ export const useFilter = () => {
         arr.push(`category=${category}`);
       }
 
-      if (price) {
-        arr.push(`price=${price}`);
+      if (maxPrice) {
+        arr.push(`maxPrice=${maxPrice}`);
       }
 
       setIsLoading(true);
@@ -37,7 +39,9 @@ export const useFilter = () => {
         setProducts(content);
       }
     })();
-  }, [searchQuery, category, price]);
+
+    return () => abortController.abort();
+  }, [searchQuery, category, maxPrice]);
 
   return { products, isLoading };
 };

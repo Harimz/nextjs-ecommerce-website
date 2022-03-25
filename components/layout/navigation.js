@@ -15,12 +15,15 @@ import MobileNav from "./mobile-nav";
 import { signOut } from "next-auth/react";
 import { useAuth, useScrollDirection } from "../../hooks";
 import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { session } = useAuth();
   const { scrollDirection } = useScrollDirection();
   const scrollingUp = scrollDirection === "UP";
+  const [searchInput, setSearchInput] = useState("");
+  const router = useRouter();
 
   const logoutHandler = () => {
     signOut();
@@ -34,6 +37,15 @@ const Navigation = () => {
     }
   }, [menuOpen]);
 
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    router.push({
+      pathname: "/search",
+      query: { searchQuery: searchInput },
+    });
+  };
+
   return (
     <NavContainer scrollingUp={scrollingUp}>
       <NavWrapper>
@@ -42,8 +54,13 @@ const Navigation = () => {
         </Link>
 
         <InputContainer mobile w="60%">
-          <FaSearch className="input-icon" />
-          <Input placeholder="Search for a product" />
+          <form onSubmit={submitHandler}>
+            <FaSearch className="input-icon" />
+            <Input
+              placeholder="Search for a product"
+              onChange={({ target }) => setSearchInput(target.value)}
+            />
+          </form>
         </InputContainer>
 
         {!session ? (
