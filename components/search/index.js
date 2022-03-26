@@ -14,7 +14,7 @@ const SearchContent = ({ children }) => {
       <Sidebar />
       <FilterContent>
         <Heading size="1.25rem" m="0 0 2rem 0">
-          Seach results for '{searchQuery}'
+          Seach results for {searchQuery}
         </Heading>
 
         {children}

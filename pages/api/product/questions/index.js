@@ -5,8 +5,10 @@ import QuestionEntry from "../../../../models/questionEntryModel";
 
 export default Wrapper({
   POST: async (req) => {
-    const session = await getSession({ req });
     const { userQuestion, product } = req.body;
+    const session = await getSession({ req });
+
+    console.log(session);
 
     if (!session) {
       throw new Exception("Not authorized!", 401);

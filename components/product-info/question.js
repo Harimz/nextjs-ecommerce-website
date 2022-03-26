@@ -27,6 +27,8 @@ const Question = ({ product }) => {
 
     setIsLoading(true);
 
+    console.log(userQuestion);
+
     const { data } = await axios.post(
       "/api/product/questions",
       { userQuestion, product },
