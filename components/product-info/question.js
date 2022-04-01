@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ClearButton, GreenSpinner, PrimaryBtn } from "../../elements";
-import { useAuth } from "../../hooks";
 import {
   InputTextContainer,
   OptionsContainer,
@@ -9,13 +8,14 @@ import {
 } from "./styles/product-info-styles";
 import UserCard from "./user-card";
 import { useRouter } from "next/router";
+import { useUser } from "../../hooks/useUser";
 
 const Question = ({ product }) => {
   const [askQuestion, setAskQuestion] = useState(false);
   const [userQuestion, setUserQuestion] = useState("");
   const [questionList, setQuestionList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { session } = useAuth();
+  const { user } = useUser();
   const router = useRouter();
 
   const setQuestionHandler = async () => {
@@ -55,7 +55,7 @@ const Question = ({ product }) => {
     getQuestionList();
 
     return () => controller.abort();
-  }, [isLoading]);
+  }, [isLoading, product]);
 
   return (
     <>
@@ -78,7 +78,7 @@ const Question = ({ product }) => {
       ) : (
         <ClearButton
           onClick={() =>
-            session ? setAskQuestion(true) : router.replace("/login")
+            user?.isLoggedIn ? setAskQuestion(true) : router.replace("/login")
           }
         >
           Ask Question

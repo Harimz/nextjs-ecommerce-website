@@ -12,21 +12,23 @@ import {
   NavWrapper,
 } from "./styles/nav-styles";
 import MobileNav from "./mobile-nav";
-import { signOut } from "next-auth/react";
-import { useAuth, useScrollDirection } from "../../hooks";
+import { useScrollDirection } from "../../hooks";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { useUser } from "../../hooks/useUser";
+import axios from "axios";
 
 const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { session } = useAuth();
   const { scrollDirection } = useScrollDirection();
   const scrollingUp = scrollDirection === "UP";
   const [searchInput, setSearchInput] = useState("");
+  const { user, mutateUser } = useUser();
   const router = useRouter();
 
-  const logoutHandler = () => {
-    signOut();
+  const logoutHandler = async () => {
+    mutateUser(await axios.post("/api/auth/logout"), false);
+    router.push("/");
   };
 
   useEffect(() => {
@@ -63,7 +65,7 @@ const Navigation = () => {
           </form>
         </InputContainer>
 
-        {!session ? (
+        {!user?.isLoggedIn ? (
           <AuthContainer gap="5rem">
             <Link passHref href="/login">
               <AuthLink>Login</AuthLink>

@@ -14,10 +14,11 @@ import { FaLock } from "react-icons/fa";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { loginOptions } from "../../utils";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { errorMessage } from "../../helpers";
+import { useUser } from "../../hooks/useUser";
+import axios from "axios";
 
 const LoginForm = () => {
   const {
@@ -27,20 +28,17 @@ const LoginForm = () => {
   } = useForm(loginOptions);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const { mutateUser } = useUser({ redirectTo: "/", redirectIfFound: true });
 
   const submitHandler = async (user) => {
     try {
       setLoading(true);
-      const result = await signIn("credentials", {
-        redirect: false,
-        email: user.email,
-        password: user.password,
-      });
 
-      if (!result.error) {
-        setLoading(false);
-        router.replace("/");
-      }
+      mutateUser(
+        await axios.post("/api/auth/login", user, {
+          "Content-Type": "application/json",
+        })
+      );
     } catch (error) {
       setLoading(false);
       toast.error(errorMessage(error), {

@@ -1,29 +1,31 @@
 import Wrapper, { Exception } from "next-api-wrapper";
-import { getSession } from "next-auth/react";
 import User from "../../../../models/userModel";
 import ReviewEntry from "../../../../models/reviewEntryModel";
+import { withIronSessionApiRoute } from "iron-session/next";
+import { sessionOptions } from "../../../../lib/session";
 
-export default Wrapper({
-  POST: async (req) => {
-    const session = await getSession({ req });
+export default withIronSessionApiRoute(
+  Wrapper({
+    POST: async (req) => {
+      const session = req.session.user;
 
-    const { userReview, product } = req.body;
+      const { userReview, product } = req.body;
 
-    if (!session) {
-      throw new Exception("Not authorized!", 401);
-    }
+      if (!session) {
+        throw new Exception("Not authorized!", 401);
+      }
 
-    const user = await User.findOne({ email: session.user.email });
+      const user = await User.findOne({ email: session.email });
 
-    console.log(user);
+      const review = await ReviewEntry.create({
+        product,
+        userReview,
+        user: user._id,
+        username: user.name,
+      });
 
-    const review = await ReviewEntry.create({
-      product,
-      userReview,
-      user: user._id,
-      username: user.name,
-    });
-
-    return review;
-  },
-});
+      return review;
+    },
+  }),
+  sessionOptions
+);

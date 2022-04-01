@@ -1,31 +1,28 @@
 import dbConnect from "../../../lib/db-connect";
 import User from "../../../models/userModel";
-import Wrapper, { Exception } from "next-api-wrapper";
 import { withIronSessionApiRoute } from "iron-session/next";
 import { sessionOptions } from "../../../lib/session";
+import Wrapper, { Exception } from "next-api-wrapper";
 
 export default withIronSessionApiRoute(
   Wrapper({
     POST: async (req) => {
-      const { name, email, password } = req.body;
-
-      if (!name || !email || !password) {
-        throw new Exception("Invalid Inputs!", 422);
-      }
+      const { email, password } = req.body;
 
       await dbConnect();
 
-      const userExists = await User.findOne({ email });
+      const user = await User.findOne({ email });
 
-      if (userExists) {
-        throw new Exception("User already exists!", 409);
+      if (!user) {
+        throw new Exception("User does not exist!", 401);
       }
 
-      const user = await User.create({ name, email, password });
+      if (!user.comparePasswords(password)) {
+        throw new Exception("Email or password is incorrect");
+      }
 
       req.session.user = { id: user._id, email: user.email };
       await req.session.save();
-
       return { isLoggedIn: true };
     },
   }),

@@ -16,7 +16,6 @@ import {
 import { RiAddFill } from "react-icons/ri";
 import { HiOutlineMinusSm } from "react-icons/hi";
 import { BsBagPlus } from "react-icons/bs";
-import { useAuth } from "../../hooks";
 import { useRouter } from "next/router";
 import { FaHeart } from "react-icons/fa";
 import { useDispatch } from "react-redux";
@@ -25,12 +24,13 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { errorMessage } from "../../helpers";
 import "react-toastify/dist/ReactToastify.css";
+import { useUser } from "../../hooks/useUser";
 
 const ProductCartDetails = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
-  const { session } = useAuth();
   const router = useRouter();
   const dispatch = useDispatch();
+  const { user } = useUser();
 
   const addToCartHandler = () => {
     dispatch(addToCart(product._id, quantity));
@@ -100,16 +100,14 @@ const ProductCartDetails = ({ product }) => {
 
       <AddContainer>
         <AddButton
-          onClick={() =>
-            session ? addToCartHandler() : router.replace("/login")
-          }
+          onClick={() => (user ? addToCartHandler() : router.replace("/login"))}
         >
           <BsBagPlus className="cart-icon" />
           Add To Cart
         </AddButton>
         <ClearButton
           onClick={() =>
-            session ? addToWishlistHandler() : router.replace("/login")
+            user?.isLoggedIn ? addToWishlistHandler() : router.replace("/login")
           }
         >
           <FaHeart />

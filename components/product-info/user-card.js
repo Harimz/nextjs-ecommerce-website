@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import { Heading, Text } from "../../elements";
-import { useAuth } from "../../hooks";
 import {
   ContentContainer,
   ProfilePic,

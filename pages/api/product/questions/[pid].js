@@ -1,6 +1,4 @@
 import Wrapper, { Exception } from "next-api-wrapper";
-import { getSession } from "next-auth/react";
-import User from "../../../../models/userModel";
 import QuestionEntry from "../../../../models/questionEntryModel";
 
 export default Wrapper({

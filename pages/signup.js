@@ -1,9 +1,10 @@
-import { getSession } from "next-auth/react";
-import Head from "next/head";
 import React from "react";
+import Head from "next/head";
 import { RiLoginCircleLine } from "react-icons/ri";
 import SignupForm from "../components/signup-form";
-import { FormContainer, Heading, Text } from "../elements";
+import { FormContainer, Heading } from "../elements";
+import { withIronSessionSsr } from "iron-session/next";
+import { sessionOptions } from "../lib/session";
 
 const SignUpPage = () => {
   return (
@@ -19,10 +20,13 @@ const SignUpPage = () => {
   );
 };
 
-export const getServerSideProps = async (context) => {
-  const session = await getSession({ req: context.req });
+export const getServerSideProps = withIronSessionSsr(async function ({
+  req,
+  res,
+}) {
+  const user = req.session.user;
 
-  if (session) {
+  if (user) {
     return {
       redirect: {
         destination: "/",
@@ -34,6 +38,7 @@ export const getServerSideProps = async (context) => {
   return {
     props: {},
   };
-};
+},
+sessionOptions);
 
 export default SignUpPage;

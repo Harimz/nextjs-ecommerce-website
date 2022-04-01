@@ -25,11 +25,11 @@ import {
   Input,
 } from "../../elements";
 import { backdropVariants, menuVariants } from "../../utils";
-import { useAuth } from "../../hooks";
+import { useUser } from "../../hooks/useUser";
 
 const MobileNav = ({ menuOpen }) => {
   const [moreDetails, setMoreDetails] = useState(-1);
-  const { session } = useAuth();
+  const { user } = useUser();
 
   return (
     <AnimatePresence>
@@ -83,14 +83,14 @@ const MobileNav = ({ menuOpen }) => {
               <Input />
             </InputContainer>
 
-            {!session && (
+            {!user?.isLoggedIn && (
               <AuthContainer>
                 <TransparentBtn>Login</TransparentBtn>
                 <PrimaryBtn>Sign Up</PrimaryBtn>
               </AuthContainer>
             )}
 
-            {session && (
+            {user?.isLoggedIn && (
               <AuthContainer>
                 <TransparentBtn>Profile</TransparentBtn>
                 <PrimaryBtn>Logout</PrimaryBtn>

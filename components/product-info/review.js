@@ -6,9 +6,9 @@ import {
   TextInput,
 } from "./styles/product-info-styles";
 import { useRouter } from "next/router";
-import { useAuth } from "../../hooks";
 import UserCard from "./user-card";
 import axios from "axios";
+import { useUser } from "../../hooks/useUser";
 
 const Review = ({ product }) => {
   const router = useRouter();
@@ -16,7 +16,7 @@ const Review = ({ product }) => {
   const [userReview, setUserReview] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [reviewList, setReviewList] = useState([]);
-  const { session } = useAuth();
+  const { user } = useUser();
 
   const setReviewHandler = async () => {
     const config = {
@@ -55,7 +55,7 @@ const Review = ({ product }) => {
     getReviewList();
 
     return () => controller.abort();
-  }, [isLoading]);
+  }, [isLoading, product]);
 
   return (
     <>
@@ -78,7 +78,7 @@ const Review = ({ product }) => {
       ) : (
         <ClearButton
           onClick={() =>
-            session ? setWriteReview(true) : router.replace("/login")
+            user?.isLoggedIn ? setWriteReview(true) : router.replace("/login")
           }
         >
           Write A Review

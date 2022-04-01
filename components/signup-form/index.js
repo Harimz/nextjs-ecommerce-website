@@ -18,10 +18,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { errorMessage } from "../../helpers";
-import { signIn, useSession } from "next-auth/react";
 
 const SignupForm = () => {
-  const pageLoading = status === "loading";
   const {
     handleSubmit,
     register,
@@ -29,40 +27,16 @@ const SignupForm = () => {
   } = useForm(signupOptions);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
-  const { data: session, status } = useSession();
-
-  if (pageLoading) {
-    return <p>Loading...</p>;
-  }
 
   const submitHandler = async (user) => {
     try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-
       setLoading(true);
-
-      const { data } = await axios.post(
-        "/api/auth/register",
-        { name: user.name, email: user.email, password: user.password },
-        config
-      );
-
-      const result = await signIn("credentials", {
-        redirect: false,
-        email: user.email,
-        password: user.password,
+      await axios.post("/api/auth/register", user, {
+        headers: { "Content-Type": "application/json" },
       });
-
       setLoading(false);
 
-      if (!result.error) {
-        router.replace("/");
-      }
+      router.push("/");
     } catch (error) {
       setLoading(false);
       toast.error(errorMessage(error), {
