@@ -16,20 +16,17 @@ import { useScrollDirection } from "../../hooks";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useUser } from "../../hooks/useUser";
-import axios from "axios";
+import User from "./user";
+import Cart from "../cart";
+import { MobileOptions } from "./styles/mobile-nav-styles";
 
 const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { scrollDirection } = useScrollDirection();
   const scrollingUp = scrollDirection === "UP";
   const [searchInput, setSearchInput] = useState("");
-  const { user, mutateUser } = useUser();
+  const { user } = useUser();
   const router = useRouter();
-
-  const logoutHandler = async () => {
-    mutateUser(await axios.post("/api/auth/logout"), false);
-    router.push("/");
-  };
 
   useEffect(() => {
     if (menuOpen) {
@@ -75,17 +72,15 @@ const Navigation = () => {
             </Link>
           </AuthContainer>
         ) : (
-          <AuthContainer gap="5rem">
-            <Link passHref href="/login">
-              <AuthLink>Profile</AuthLink>
-            </Link>
-            <AuthLink onClick={logoutHandler}>Logout</AuthLink>
-          </AuthContainer>
+          <User />
         )}
 
-        <MenuButton onClick={() => setMenuOpen((state) => !state)}>
-          <MenuButtonBurger isOpen={menuOpen} />
-        </MenuButton>
+        <MobileOptions>
+          <Cart />
+          <MenuButton onClick={() => setMenuOpen((state) => !state)}>
+            <MenuButtonBurger isOpen={menuOpen} />
+          </MenuButton>
+        </MobileOptions>
       </NavWrapper>
 
       <MobileNav menuOpen={menuOpen} setIsOpen={setMenuOpen} />

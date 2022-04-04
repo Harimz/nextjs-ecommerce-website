@@ -4,7 +4,7 @@ import Wrapper, { Exception } from "next-api-wrapper";
 
 export default Wrapper({
   GET: async (req) => {
-    const { searchQuery, category, maxPrice } = req.query;
+    const { searchQuery, category, maxPrice, brand } = req.query;
 
     await dbConnect();
 
@@ -21,6 +21,7 @@ export default Wrapper({
 
       return filteredProducts;
     }
+    if (brand) filters.tags = brand;
 
     const products = await Product.find(filters);
 

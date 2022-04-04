@@ -18,6 +18,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { errorMessage } from "../../helpers";
+import { useUser } from "../../hooks/useUser";
 
 const SignupForm = () => {
   const {
@@ -27,13 +28,18 @@ const SignupForm = () => {
   } = useForm(signupOptions);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { mutateUser } = useUser();
 
   const submitHandler = async (user) => {
     try {
       setLoading(true);
-      await axios.post("/api/auth/register", user, {
-        headers: { "Content-Type": "application/json" },
-      });
+
+      mutateUser(
+        await axios.post("/api/auth/register", user, {
+          "Content-Type": "application/json",
+        })
+      );
+
       setLoading(false);
 
       router.push("/");

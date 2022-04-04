@@ -73,3 +73,13 @@ export const AuthContainer = styled.div`
   grid-gap: 1rem;
   flex-direction: column-reverse;
 `;
+
+export const MobileOptions = styled.div`
+  display: none;
+
+  @media (max-width: 1050px) {
+    display: flex;
+    align-items: center;
+    grid-gap: 1rem;
+  }
+`;

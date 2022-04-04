@@ -29,3 +29,8 @@ export const displayChildVariants = {
   hidden: { opacity: 0, y: "5rem" },
   visible: { opacity: 1, y: "0rem" },
 };
+
+export const userMenuVariants = {
+  hidden: { opacity: 0, y: -40 },
+  visible: { opacity: 1, y: 0 },
+};

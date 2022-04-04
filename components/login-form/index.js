@@ -39,6 +39,7 @@ const LoginForm = () => {
           "Content-Type": "application/json",
         })
       );
+      setLoading(false);
     } catch (error) {
       setLoading(false);
       toast.error(errorMessage(error), {
