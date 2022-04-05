@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import {
   FaShoppingCart,
@@ -24,16 +24,24 @@ import { useUser } from "../../hooks/useUser";
 import axios from "axios";
 import { useRouter } from "next/router";
 import Cart from "../cart";
+import { useScrollDirection } from "../../hooks";
 
 const User = () => {
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const { mutateUser } = useUser();
   const router = useRouter();
+  const { scrollDirection } = useScrollDirection();
 
   const logoutHandler = async () => {
     mutateUser(await axios.post("/api/auth/logout"), false);
     router.push("/");
   };
+
+  useEffect(() => {
+    if (scrollDirection === "DOWN") {
+      setProfileMenuOpen(false);
+    }
+  }, [scrollDirection]);
 
   return (
     <UserContainer>

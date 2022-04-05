@@ -38,6 +38,19 @@ export default withIronSessionApiRoute(
         throw new Error(500, "Something went wrong");
       }
     },
+    GET: async (req) => {
+      const session = req.session.user;
+
+      if (!session) {
+        throw new Exception("Not authorized!", 401);
+      }
+
+      const userWishList = await WishListEntry.find({ user: session.id });
+
+      console.log(userWishList);
+
+      return userWishList;
+    },
   }),
   sessionOptions
 );

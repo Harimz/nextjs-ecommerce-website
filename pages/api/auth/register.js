@@ -23,7 +23,7 @@ export default withIronSessionApiRoute(
 
       const user = await User.create({ name, email, password });
 
-      req.session.user = { id: user._id, email: user.email };
+      req.session.user = { id: user._id, email: user.email, name: user.name };
       await req.session.save();
 
       return { isLoggedIn: true };
