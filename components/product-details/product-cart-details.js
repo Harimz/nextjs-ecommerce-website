@@ -18,50 +18,49 @@ import { HiOutlineMinusSm } from "react-icons/hi";
 import { BsBagPlus } from "react-icons/bs";
 import { useRouter } from "next/router";
 import { FaHeart } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../actions/cartActions";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { errorMessage } from "../../helpers";
 import "react-toastify/dist/ReactToastify.css";
 import { useUser } from "../../hooks/useUser";
+import { addToWishlist } from "../../actions/wishlistActions";
 
 const ProductCartDetails = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
   const router = useRouter();
   const dispatch = useDispatch();
   const { user } = useUser();
+  const { loading, error, successMessage } = useSelector(
+    (state) => state.addToWishlist
+  );
+
+  useEffect(() => {
+    if (error?.length > 0) {
+      toast.error(error, {
+        position: "top-center",
+      });
+    }
+    if (successMessage?.length > 0) {
+      toast.success(successMessage, {
+        position: "top-center",
+      });
+    }
+  }, [error, successMessage]);
 
   const addToCartHandler = () => {
     dispatch(addToCart(product._id, quantity));
   };
 
   const addToWishlistHandler = async () => {
-    try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
+    const productDetails = {
+      product: product._id,
+      price: product.price,
+      image: product.images[0],
+      name: product.name,
+    };
 
-      const { data } = await axios.post(
-        "/api/wishlist",
-        {
-          product: product._id,
-          price: product.price,
-          image: product.images[0],
-        },
-        config
-      );
-
-      toast.success(data.message, {
-        position: "top-center",
-      });
-    } catch (error) {
-      toast.error(errorMessage(error), {
-        position: "top-center",
-      });
-    }
+    dispatch(addToWishlist(productDetails));
   };
 
   return (

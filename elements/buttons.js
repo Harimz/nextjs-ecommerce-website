@@ -9,7 +9,7 @@ export const DefaultBtn = styled.button`
   border: 0;
   width: ${({ w }) => w};
 
-  transition: all 0.3s ease-in;
+  transition: all 0.1s ease-in;
 `;
 
 export const TransparentBtn = styled(DefaultBtn)`
@@ -28,7 +28,6 @@ export const PrimaryBtn = styled(DefaultBtn)`
 
   &:hover {
     transform: scale(0.99);
-    box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.5);
   }
 
   &:active {
@@ -67,5 +66,22 @@ export const ClearButton = styled(DefaultBtn)`
 
   &:hover {
     background: rgba(0, 0, 0, 0.1);
+  }
+`;
+
+export const RemoveButton = styled(DefaultBtn)`
+  background-color: ${({ theme }) => theme.red[100]};
+  color: white;
+  border-radius: 0.5rem;
+  min-width: 12rem;
+  width: 8rem;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(0.99);
+  }
+
+  &:active {
+    transform: scale(1);
   }
 `;

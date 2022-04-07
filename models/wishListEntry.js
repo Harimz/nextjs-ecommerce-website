@@ -14,6 +14,10 @@ const wishListEntrySchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    productName: {
+      type: String,
+      required: false,
+    },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,

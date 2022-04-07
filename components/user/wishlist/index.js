@@ -1,10 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { AddButton, Heading, Text } from "../../../elements";
-import { WishlistContainer, WishlistHeader } from "../styles/wishlist-styles";
+import {
+  WishlistContainer,
+  WishlistHeader,
+  WishlistWrapper,
+} from "../styles/wishlist-styles";
+import ListCard from "./list-card";
 
 const Wishlist = () => {
   const [wishlist, setWishList] = useState([]);
+
+  const deleteWishHandler = useCallback(async () => {
+    try {
+      const { data } = axios.delete(`/api/wishlist/${itemDetails.product}`);
+
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -15,10 +30,10 @@ const Wishlist = () => {
 
         setWishList(data);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     })();
-  }, []);
+  }, [deleteWishHandler]);
 
   return (
     <WishlistContainer>
@@ -27,11 +42,23 @@ const Wishlist = () => {
       {wishlist.length === 0 ? (
         <Text>Your wishlist is empty</Text>
       ) : (
-        <WishlistHeader>
-          <Heading size="1.5rem">Product</Heading>
-          <Heading size="1.5rem">Price</Heading>
-          <Heading size="1.5rem">Actions</Heading>
-        </WishlistHeader>
+        <>
+          <WishlistHeader>
+            <Heading size="1.25rem">Product</Heading>
+            <Heading size="1.25rem">Price</Heading>
+            <Heading size="1.25rem">Actions</Heading>
+          </WishlistHeader>
+
+          <WishlistWrapper>
+            {wishlist.map((listItem) => (
+              <ListCard
+                key={listItem._id}
+                itemDetails={listItem}
+                onDelete={deleteWishHandler}
+              />
+            ))}
+          </WishlistWrapper>
+        </>
       )}
     </WishlistContainer>
   );

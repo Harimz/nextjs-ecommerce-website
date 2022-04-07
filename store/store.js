@@ -2,6 +2,10 @@ import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { cartReducer } from "../reducers/cartReducer";
+import {
+  addToWishlistReducer,
+  loadWishlistReducer,
+} from "../reducers/wishlistReducer";
 
 let cartItemsFromStorage;
 
@@ -15,10 +19,13 @@ const initialState = {
   cart: {
     cartItems: cartItemsFromStorage,
   },
+  wishlist: [],
 };
 
 const reducer = combineReducers({
   cart: cartReducer,
+  addToWishlist: addToWishlistReducer,
+  wishlist: loadWishlistReducer,
 });
 
 const middleware = [thunk];

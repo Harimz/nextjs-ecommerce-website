@@ -8,7 +8,7 @@ export default withIronSessionApiRoute(
   Wrapper({
     POST: async (req) => {
       const session = req.session.user;
-      const { product, image, price } = req.body;
+      const { name, product, image, price } = req.body;
 
       if (!session) {
         throw new Exception("Not authorized!", 401);
@@ -25,12 +25,15 @@ export default withIronSessionApiRoute(
         throw new Exception("Product is already in your wishlist!", 409);
       }
 
-      const newEntry = await WishListEntry.create({
+      const newProduct = {
+        productName: name,
         product,
         image,
         price,
         user: user._id,
-      });
+      };
+
+      const newEntry = await WishListEntry.create(newProduct);
 
       if (newEntry) {
         return { message: "Product has been added to your wishlist!" };
@@ -47,9 +50,19 @@ export default withIronSessionApiRoute(
 
       const userWishList = await WishListEntry.find({ user: session.id });
 
-      console.log(userWishList);
-
       return userWishList;
+    },
+    DELETE: async (req) => {
+      const session = req.session.user;
+      const params = req.query;
+
+      console.log(params);
+
+      if (!session) {
+        throw new Exception("Not authorized!", 401);
+      }
+
+      // await WishListEntry.findOneAndDelete({ user: session.id, product, product:  })
     },
   }),
   sessionOptions
