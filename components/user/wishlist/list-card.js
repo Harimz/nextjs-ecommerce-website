@@ -1,27 +1,29 @@
-import axios from "axios";
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
 import { Heading, RemoveButton, Text } from "../../../elements";
-import {
-  ItemActions,
-  ItemImage,
-  ItemView,
-  WishListCard,
-} from "../styles/wishlist-styles";
+import { ItemImage, ItemView, WishListCard } from "../styles/wishlist-styles";
+import { useDispatch } from "react-redux";
+import { removeFromWishList } from "../../../actions/wishlistActions";
+import { useRouter } from "next/router";
 
 const ListCard = ({ itemDetails, deleteWishHandler }) => {
-  console.log(itemDetails);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const deleteFromListHandler = () => {
+    dispatch(removeFromWishList(itemDetails.product));
+  };
 
   return (
     <WishListCard>
-      <ItemView>
+      <ItemView onClick={() => router.push(`/products/${itemDetails.product}`)}>
         <ItemImage>
           <Image src={itemDetails.image} alt={itemDetails.name} layout="fill" />
         </ItemImage>
         <Heading size="1rem">{itemDetails.productName}</Heading>
       </ItemView>
       <Text>${itemDetails.price}</Text>
-      <RemoveButton onClick={deleteWishHandler}>delete</RemoveButton>
+      <RemoveButton onClick={deleteFromListHandler}>delete</RemoveButton>
     </WishListCard>
   );
 };

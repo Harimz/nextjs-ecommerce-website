@@ -73,7 +73,6 @@ export const RemoveButton = styled(DefaultBtn)`
   background-color: ${({ theme }) => theme.red[100]};
   color: white;
   border-radius: 0.5rem;
-  min-width: 12rem;
   width: 8rem;
   cursor: pointer;
 

@@ -24,7 +24,10 @@ import { toast } from "react-toastify";
 import { errorMessage } from "../../helpers";
 import "react-toastify/dist/ReactToastify.css";
 import { useUser } from "../../hooks/useUser";
-import { addToWishlist } from "../../actions/wishlistActions";
+import {
+  addToWishlist,
+  clearAddToWishList,
+} from "../../actions/wishlistActions";
 
 const ProductCartDetails = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
@@ -32,7 +35,7 @@ const ProductCartDetails = ({ product }) => {
   const dispatch = useDispatch();
   const { user } = useUser();
   const { loading, error, successMessage } = useSelector(
-    (state) => state.addToWishlist
+    (state) => state.wishlist
   );
 
   useEffect(() => {
@@ -40,13 +43,19 @@ const ProductCartDetails = ({ product }) => {
       toast.error(error, {
         position: "top-center",
       });
+
+      dispatch(clearAddToWishList());
     }
-    if (successMessage?.length > 0) {
-      toast.success(successMessage, {
+    if (successMessage?.message.length > 0) {
+      console.log("we in here");
+
+      toast.success(successMessage.message, {
         position: "top-center",
       });
+
+      dispatch(clearAddToWishList());
     }
-  }, [error, successMessage]);
+  }, [error, successMessage?.message, dispatch, successMessage]);
 
   const addToCartHandler = () => {
     dispatch(addToCart(product._id, quantity));

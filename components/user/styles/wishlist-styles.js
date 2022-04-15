@@ -25,6 +25,10 @@ export const WishlistHeader = styled.div`
   h1:nth-child(3) {
     grid-column: 4 / 5;
   }
+
+  @media (max-width: 560px) {
+    display: none;
+  }
 `;
 
 export const WishlistWrapper = styled.div`
@@ -46,6 +50,11 @@ export const ItemView = styled.div`
   align-items: center;
   grid-gap: 1rem;
   grid-column: 1 / 3;
+  cursor: pointer;
+
+  @media (max-width: 560px) {
+    flex-direction: column;
+  }
 `;
 
 export const ItemImage = styled.div`
@@ -55,6 +64,11 @@ export const ItemImage = styled.div`
   border-radius: 1rem;
   overflow: hidden;
   filter: brightness(95%);
+
+  @media (max-width: 560px) {
+    height: 5rem;
+    width: 6rem;
+  }
 `;
 
 export const ItemActions = styled.div``;
