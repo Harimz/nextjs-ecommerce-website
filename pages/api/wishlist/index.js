@@ -56,8 +56,6 @@ export default withIronSessionApiRoute(
       const session = req.session.user;
       const params = req.query;
 
-      console.log(params);
-
       if (!session) {
         throw new Exception("Not authorized!", 401);
       }

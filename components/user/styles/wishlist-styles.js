@@ -5,6 +5,7 @@ export const WishlistContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 3rem;
+  min-height: 50vh;
 `;
 
 export const WishlistHeader = styled.div`

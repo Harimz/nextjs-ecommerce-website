@@ -9,8 +9,6 @@ export default withIronSessionApiRoute(
       const session = req.session.user;
       const { productId } = req.query;
 
-      console.log("we in here");
-
       if (!session) {
         throw new Exception("Not authorized!", 401);
       }

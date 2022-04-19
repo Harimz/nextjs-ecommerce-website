@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import {
   FaShoppingCart,
@@ -31,6 +31,7 @@ const User = () => {
   const { mutateUser } = useUser();
   const router = useRouter();
   const { scrollDirection } = useScrollDirection();
+  const ref = useRef();
 
   const logoutHandler = async () => {
     mutateUser(await axios.post("/api/auth/logout"), false);
@@ -41,7 +42,25 @@ const User = () => {
     if (scrollDirection === "DOWN") {
       setProfileMenuOpen(false);
     }
-  }, [scrollDirection]);
+
+    const checkIfClickedOutside = (e) => {
+      if (profileMenuOpen && ref.current && !ref.current.contains(e.target)) {
+        setProfileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", checkIfClickedOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", checkIfClickedOutside);
+    };
+  }, [scrollDirection, profileMenuOpen]);
+
+  useEffect(() => {
+    if (profileMenuOpen) {
+      setProfileMenuOpen(!profileMenuOpen);
+    }
+  }, [router.asPath]);
 
   return (
     <UserContainer>
@@ -63,6 +82,7 @@ const User = () => {
               initial="hidden"
               animate="visible"
               exit="hidden"
+              ref={ref}
             >
               <Link href="/user/profile" passHref>
                 <OptionsItem>
