@@ -8,7 +8,6 @@ export const CartIcon = styled.div`
 export const ItemCount = styled.div`
   position: absolute;
   background: ${({ theme }) => theme.green[200]};
-  border-radius: 50%;
   height: 1.75rem;
   width: 1.75rem;
   color: white;
@@ -18,6 +17,7 @@ export const ItemCount = styled.div`
   left: 1.1rem;
   bottom: 1.1rem;
   cursor: pointer;
+  border-radius: 50%;
 `;
 
 export const CartBackdrop = styled(motion.div)`

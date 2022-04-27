@@ -75,8 +75,8 @@ const User = () => {
           />
         </UserImage>
 
-        {profileMenuOpen && (
-          <AnimatePresence>
+        <AnimatePresence>
+          {profileMenuOpen && (
             <UserOptions
               variants={userMenuVariants}
               initial="hidden"
@@ -107,8 +107,8 @@ const User = () => {
                 <Heading size="0.75rem">Logout</Heading>
               </OptionsItem>
             </UserOptions>
-          </AnimatePresence>
-        )}
+          )}
+        </AnimatePresence>
       </UserMenu>
     </UserContainer>
   );
